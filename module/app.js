@@ -16,7 +16,7 @@ const rectangle=()=>{
 }
 
 
-module.exoprts={
+module.exports={
 
     circle:circle,
     triangle:triangle,
