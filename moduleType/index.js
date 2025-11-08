@@ -12,3 +12,5 @@ const data=fs.readFileSync("index.html","utf8")
 console.log(data)
 
 fs.appendFileSync("index.html","<h2>Hello Backend Developer</h2>")
+
+fs.unlink()
