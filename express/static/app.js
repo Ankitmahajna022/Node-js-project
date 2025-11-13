@@ -2,6 +2,7 @@ import express from 'express'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 import path from 'path'
+import route from './main/routes'
 
 const app = express()
 const PORT=9000
@@ -23,25 +24,13 @@ app.use((req,res,next)=>{
     next()
 })
 
-app.get("/",(req,res)=>{
-    res.sendFile(path.join(__dirname,"../public/index.html"))
-})
 
-app.get("/about",(req,res)=>{
-    res.sendFile(path.join(__dirname,"../public/about"))
-})
-
-app.get("/contact",(req,res)=>{
-    res.sendFile(path.join(__dirname,"../public/contact.html"))
-})
-
-app.get("/data",(req,res)=>{
-    res.json({message:"Hello Node.js /data route"})
-})
 
 app.use((req,res)=>{
    res.status(404).sendFile(path.join(__dirname,"404.html"))
 })
+
+app.use("/",route)
 
 
 app.listen(PORT,()=>{
