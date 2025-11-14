@@ -2,37 +2,32 @@ import express from 'express'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 import path from 'path'
-import route from './main/routes'
+import route from '../static/main/routes.mjs' 
 
 const app = express()
-const PORT=9000
+const PORT = 9000
 
-const __filename=fileURLToPath(import.meta.url)
-const __dirname=path.dirname(__filename)
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
+const logFile = path.join(__dirname, "logss.txt")
 
-const logFile=path.join(__dirname,"logss.txt")
+app.use((req, res, next) => {
+    const log = `[${new Date().toLocaleString()}] ${req.url}\n`
 
-
-app.use((req,res,next)=>{
-    const log=`[${new Date().toLocaleString()}] ${req.url}\n`
-     
-    fs.appendFile(logFile,log,(err)=>{
-        if (err) console.error("Error writing log:", err);
-
+    fs.appendFile(logFile, log, err => {
+        if (err) console.error("Error writing log:", err)
     })
-    next()
+
+    next()  
 })
 
+app.use("/", route)
 
-
-app.use((req,res)=>{
-   res.status(404).sendFile(path.join(__dirname,"404.html"))
+app.use((req, res) => {
+    res.status(404).sendFile(path.join(__dirname, "404.html"))
 })
 
-app.use("/",route)
-
-
-app.listen(PORT,()=>{
+app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 })
