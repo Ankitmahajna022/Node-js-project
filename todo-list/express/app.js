@@ -13,7 +13,6 @@ app.use(express.json());
 
 let todos = [];
 
-// Get All Todos
 app.get("/todos", (req, res) => {
     const { status } = req.query;
 
@@ -24,7 +23,6 @@ app.get("/todos", (req, res) => {
     res.json(todos);
 });
 
-// Add Todo
 app.post("/todos", (req, res) => {
     const todo = {
         id: Date.now(),
@@ -33,8 +31,8 @@ app.post("/todos", (req, res) => {
         isCompleted: false,
         isExpanded: false,
         status: req.body.status,
-        date: new Date().toISOString().split("T")[0],   // FIXED
-        time: new Date().toLocaleTimeString(),          // FIXED
+        date: new Date().toISOString().split("T")[0],   
+        time: new Date().toLocaleTimeString(),      
         description: req.body.description
     };
 
@@ -42,7 +40,7 @@ app.post("/todos", (req, res) => {
     res.json(todo);
 });
 
-// Delete Todo  (FIXED ROUTE)
+
 app.delete("/todos/:id", (req, res) => {
     todos = todos.filter(t => t.id != req.params.id);
     res.json({ success: true });

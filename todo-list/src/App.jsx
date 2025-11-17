@@ -7,7 +7,7 @@ export default function App() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  // Edit States
+
   const [editMode, setEditMode] = useState(null);
   const [editTitle, setEditTitle] = useState("");
   const [editDescription, setEditDescription] = useState("");
@@ -57,7 +57,6 @@ export default function App() {
     );
   };
 
-  // SAVE EDIT
   const saveEdit = async (id) => {
     const updatedTodo = {
       title: editTitle,
@@ -79,7 +78,6 @@ export default function App() {
     <div className="container">
       <h1 className="heading">Todo App</h1>
 
-      {/* Input Box */}
       <div className="inputBox">
         <input
           className="input"
@@ -100,7 +98,7 @@ export default function App() {
         </button>
       </div>
 
-      {/* Todo List */}
+
       <div className="todoList">
         {todos.map((t) => (
           <div
@@ -113,17 +111,17 @@ export default function App() {
               </span>
 
               <div>
-                {/* Toggle Complete */}
+              
                 <button className="smallBtn" onClick={() => toggleCompleted(t)}>
                   {t.isCompleted ? "✔" : "○"}
                 </button>
 
-                {/* Expand */}
+          
                 <button className="smallBtn" onClick={() => toggleExpand(t.id)}>
                   ▼
                 </button>
 
-                {/* Edit Button */}
+  
                 <button
                   className="smallBtn"
                   onClick={() => {
@@ -135,14 +133,12 @@ export default function App() {
                   ✏
                 </button>
 
-                {/* Delete */}
                 <button className="deleteBtn" onClick={() => deleteTodo(t.id)}>
                   🗑
                 </button>
               </div>
             </div>
 
-            {/* Expanded Content */}
             {t.isExpanded && (
               <div className="expandedBox">
                 <p>
@@ -152,7 +148,6 @@ export default function App() {
                   <b>Status:</b> {t.status}
                 </p>
 
-                {/* Edit Mode Box */}
                 {editMode === t.id && (
                   <div className="editBox">
                     <input
@@ -170,7 +165,7 @@ export default function App() {
                     />
 
                     <button className="addBtn" onClick={() => saveEdit(t.id)}>
-                      💾 Save
+                       Save
                     </button>
 
                     <button
