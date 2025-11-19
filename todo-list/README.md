@@ -19,8 +19,6 @@ Clean UI + Axios API Integration
 <video src="https://github.com/user-attachments/assets/6e1ebfbc-c735-4ea8-b319-77ea87c6f766"></video>
 
 📂 Project Structure
-pgsql
-Copy code
 project/
 │── backend/
 │   ├── server.js
@@ -33,38 +31,33 @@ project/
 │   └── components/
 │
 └── README.md
+
 🧩 API Endpoints (Express)
 ➕ Add Todo
-bash
-Copy code
 POST /todos
-Body
+
 
 json
-Copy code
 {
   "title": "Todo title",
   "description": "Details",
   "status": "Pending",
   "dead_line": ""
 }
+
 📌 Get All Todos
-bash
-Copy code
 GET /todos
+
 Filter by status:
-bash
-Copy code
 GET /todos?status=Pending
 GET /todos?status=Completed
+
 ✏ Update Todo
-bash
-Copy code
 PUT /todos/:id
+
 🗑 Delete Todo
-bash
-Copy code
 DELETE /todos/:id
+
 🧪 Technologies Used
 Frontend
 React
@@ -84,32 +77,27 @@ File storage (JSON) or MongoDB
 
 🛠 Installation & Setup
 1️⃣ Clone the repository
-bash
-Copy code
 git clone https://github.com/your-username/todo-app.git
 cd todo-app
+
 2️⃣ Setup Backend
-bash
-Copy code
 cd backend
 npm install
 node server.js
-Backend runs at:
+
 
 arduino
-Copy code
 http://localhost:5000
+
 3️⃣ Setup Frontend
-bash
-Copy code
 cd frontend
 npm install
 npm run dev
-Frontend runs at:
+
 
 arduino
-Copy code
 http://localhost:5173
+
 📝 Future Improvements
 Add due dates
 
