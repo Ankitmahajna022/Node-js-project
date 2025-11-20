@@ -18,20 +18,6 @@ Clean UI + Axios API Integration
 📸 Preview
 <video src="https://github.com/user-attachments/assets/6e1ebfbc-c735-4ea8-b319-77ea87c6f766"></video>
 
-📂 Project Structure
-project/
-│── backend/
-│   ├── server.js
-│   └── data.json   (optional for file storage)
-│
-│── frontend/
-│   ├── src/
-│   ├── App.js
-│   ├── App.css
-│   └── components/
-│
-└── README.md
-
 🧩 API Endpoints (Express)
 ➕ Add Todo
 POST /todos
@@ -46,9 +32,7 @@ json
 }
 
 📌 Get All Todos
-GET /todos
 
-Filter by status:
 GET /todos?status=Pending
 GET /todos?status=Completed
 
