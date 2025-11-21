@@ -1,4 +1,4 @@
-// middleware 
+
 import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -10,7 +10,6 @@ const __dirname = path.dirname(__filename)
 
 const app = express()
 
-// Logger middleware
 app.use((req, res, next) => {
 
     const date = new Date();   //
@@ -23,8 +22,6 @@ app.use((req, res, next) => {
     next();
 })
 
-
-// Admin Check Middleware
 const checkUser = (req, res, next) => {
   const date = new Date();
 
@@ -54,7 +51,6 @@ app.get("/admin", checkUser, (req, res) => {
 });
 
 
-// Start Server
 app.listen(4000, () => {
   console.log("Server started on port 4000!");
 });
