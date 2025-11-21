@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Todo App</title>
+  <link rel="stylesheet" href="about.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      font-family: system-ui, Inter, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 1rem;
+    }
+
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #e6edf3;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #0f172a;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #2563eb;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-list a {
+      text-decoration: none;
+      color: #475569;
+      font-weight: 500;
+      padding: 0.45rem 0.75rem;
+      border-radius: 8px;
+    }
+
+    .nav-list a:hover {
+      background: rgba(37, 99, 235, 0.08);
+      color: #0f172a;
+    }
+
+    .nav-list .active {
+      color: #2563eb;
+      font-weight: 600;
+    }
+
+
+    .btn-primary {
+      background: #2563eb;
+      color: #fff;
+      padding: 0.55rem 0.9rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+
+    .about-hero {
+      margin: 2.5rem auto 1rem;
+      text-align: center;
+    }
+
+    .about-hero h1 {
+      font-size: 2.4rem;
+      color: #0f172a;
+    }
+
+    .about-hero .subtitle {
+      margin-top: 0.5rem;
+      color: #475569;
+    }
+
+    .about-content {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 2rem;
+    }
+
+    .about-text h2 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.4rem;
+      color: #0f172a;
+    }
+
+    .about-text p {
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-text ul {
+      margin-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .about-text ul li {
+      margin-bottom: 0.4rem;
+      color: #334155;
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(2, 6, 23, 0.06);
+    }
+
+    .site-footer {
+      margin-top: 3rem;
+      padding: 1.25rem 0;
+      background: #fff;
+      border-top: 1px solid #e6edf3;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .small {
+      opacity: 0.75;
+    }
+
+    @media (max-width: 880px) {
+      .nav-list {
+        display: none;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="home.html">Todo<span>App</span></a>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="home.html">Home</a></li>
+          <li><a class="active" href="about.html">About</a></li>
+          <li><a href="#">Docs</a></li>
+          <li><a class="btn-primary" href="#">Get Started</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="about-hero container">
+      <h1>About This Project</h1>
+      <p class="subtitle">
+        A lightweight and efficient Todo App built with React & Express.
+      </p>
+    </section>
+
+    <section class="about-content container">
+      <div class="about-text">
+        <h2>Why this project?</h2>
+        <p>
+          This Todo App was created to demonstrate a clean full-stack workflow using
+          <strong>React</strong> on the frontend and <strong>Express.js</strong> on the backend.
+          The main goal is to provide a scalable structure that can be easily extended.
+        </p>
+
+        <h2>Key Features</h2>
+        <ul>
+          <li>✔ Add, edit, and delete todos</li>
+          <li>✔ Filter todos by status</li>
+          <li>✔ Responsive, modern UI</li>
+          <li>✔ Clean folder structure</li>
+        </ul>
+
+        <h2>Tech Stack</h2>
+        <p>Built with:</p>
+        <ul>
+          <li>⚛ React</li>
+          <li>🚀 Express.js</li>
+          <li>🔗 Axios</li>
+          <li>🎨 Modern CSS styling</li>
+        </ul>
+
+        <h2>Future Goals</h2>
+        <p>
+          This project is actively improving! Expected future updates:
+        </p>
+        <ul>
+          <li>🗂 MongoDB database support</li>
+          <li>👤 User login system</li>
+          <li>🎚 Priority levels for tasks</li>
+          <li>🎉 Better UI animations</li>
+        </ul>
+      </div>
+
+      <div class="about-image">
+        <img src="https://picsum.photos/600/600" alt="About image" />
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> TodoApp • MIT License</p>
+      <p class="small">Made with ❤️ using React & Express</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+
+</html>

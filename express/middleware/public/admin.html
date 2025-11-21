@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — Todo App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 1rem;
+    }
+
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #e4e9f0;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      text-decoration: none;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .logo span {
+      color: #2563eb;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-list a {
+      text-decoration: none;
+      padding: 0.45rem 0.75rem;
+      color: #475569;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    .nav-list a:hover,
+    .nav-list .active {
+      background: rgba(37, 99, 235, 0.1);
+      color: #2563eb;
+    }
+
+    .admin-wrapper {
+      margin-top: 2.5rem;
+    }
+
+    .admin-title {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .admin-sub {
+      text-align: center;
+      color: #64748b;
+      margin-top: 0.3rem;
+    }
+
+    .admin-card {
+      background: #ffffff;
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: 14px;
+      border: 1px solid #e5eaf2;
+      box-shadow: 0 12px 32px rgba(2, 6, 23, 0.06);
+    }
+
+    .admin-card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1.3rem;
+      color: #0f172a;
+    }
+
+    .admin-form {
+      display: grid;
+      gap: 1.3rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: #475569;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 10px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      font-size: 0.95rem;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    textarea {
+      height: 120px;
+      resize: none;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #2563eb;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+
+    .btn-primary {
+      background: #2563eb;
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.18);
+      transition: 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .site-footer {
+      margin-top: 3rem;
+      padding: 1.25rem 0;
+      background: #fff;
+      border-top: 1px solid #e6edf3;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      color: #64748b;
+    }
+
+    .small {
+      opacity: 0.8;
+    }
+
+
+    @media (max-width: 850px) {
+      .nav-list {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Todo<span>App</span></a>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a class="active" href="admin.html">Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Admin Panel -->
+  <main class="container admin-wrapper">
+
+    <h1 class="admin-title">Admin Panel</h1>
+    <p class="admin-sub">Manage your application data with this Noble Form panel.</p>
+
+    <div class="admin-card">
+
+      <h2>Add New Todo (Admin Only)</h2>
+
+      <form class="admin-form">
+
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" placeholder="Enter todo title..." />
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <textarea placeholder="Enter description..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Status</label>
+          <select>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Deadline</label>
+          <input type="date" />
+        </div>
+
+        <button class="btn-primary admin-btn">Submit</button>
+
+      </form>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> TodoApp • Admin</p>
+      <p class="small">Admin panel with Noble Form UI</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+[User visited by GET method on localhost:4000/ route at 21/11/2025 13:30:22]
+[User visited by GET method on localhost:4000/home.css route at 21/11/2025 13:30:22]
+[User visited by GET method on localhost:4000/about route at 21/11/2025 13:30:33]
+[User visited by GET method on localhost:4000/about.css route at 21/11/2025 13:30:33]
+[User visited by GET method on localhost:4000/admin?role=amdin route at 21/11/2025 13:31:28]
+[User visited by GET method on localhost:4000/admin?role%20amdin route at 21/11/2025 13:31:37]
