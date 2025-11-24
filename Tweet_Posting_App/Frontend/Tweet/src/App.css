@@ -1,0 +1,42 @@
+/* Main container holding sidebar, feed and right panel */
+.app-shell {
+  display: flex;
+  max-width: 1300px;
+  margin: 0 auto;
+  background: #ffffff;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Center column (feed + tweet form) */
+.center-column {
+  flex: 1;
+  border-left: 1px solid #E6ECF0;
+  border-right: 1px solid #E6ECF0;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+/* Compose area styling */
+.compose-area {
+  padding: 15px;
+  border-bottom: 1px solid #E6ECF0;
+  background: #ffffff;
+}
+
+/* Generic card style */
+.card {
+  background: #ffffff;
+  border-radius: 15px;
+}
+
+/* Disable scrollbars for sidebar + right panel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d1d1;
+  border-radius: 10px;
+}

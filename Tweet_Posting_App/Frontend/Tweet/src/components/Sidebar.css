@@ -1,0 +1,65 @@
+.sidebar {
+  width: 250px;
+  padding: 20px;
+  border-right: 1px solid #E6ECF0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Logo */
+.logo {
+  font-size: 35px;
+  color: #1DA1F2;
+  margin-bottom: 25px;
+}
+
+/* Navigation menu */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.nav-item {
+  font-size: 20px;
+  padding: 10px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #0f1419;
+  transition: 0.2s;
+}
+
+.nav-item:hover {
+  background: rgba(29, 161, 242, 0.1);
+  color: #1DA1F2;
+}
+
+.nav-item.active {
+  font-weight: 700;
+  color: #1DA1F2;
+}
+
+/* Tweet button */
+.tweet-btn {
+  background: #1DA1F2;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px 0;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+  transition: 0.2s;
+}
+
+.tweet-btn:hover {
+  background: #188cd6;
+}

@@ -1,0 +1,99 @@
+/* Right Panel Container */
+.rightpanel {
+  width: 350px;
+  padding: 20px;
+  background: #ffffff;
+  border-left: 1px solid #E6ECF0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Search box */
+.searchbox {
+  background: #EFF3F4;
+  padding: 12px 14px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.searchbox input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 15px;
+  color: #0F1419;
+}
+
+/* Panel card (Trends + Who to follow) */
+.panel {
+  background: #F7F9F9;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.panel h4 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #0F1419;
+}
+
+/* Trend Item */
+.trend-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #E6ECF0;
+  cursor: pointer;
+}
+
+.trend-item:last-child {
+  border-bottom: none;
+}
+
+.trend-item:hover {
+  background: #E8F5FE;
+  border-radius: 10px;
+}
+
+/* Trend subtitle */
+.trend-sub {
+  color: #536471;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 3px;
+}
+
+/* Trend main text */
+.trend-title {
+  font-size: 15px;
+  color: #0F1419;
+  font-weight: 600;
+  display: block;
+}
+
+/* Tweet count (fake data) */
+.trend-count {
+  color: #536471;
+  font-size: 12px;
+  display: block;
+  margin-top: 3px;
+}
+
+/* Show More link */
+.show-more {
+  display: inline-block;
+  margin-top: 10px;
+  color: #1DA1F2;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.show-more:hover {
+  text-decoration: underline;
+}

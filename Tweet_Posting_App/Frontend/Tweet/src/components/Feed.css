@@ -1,0 +1,36 @@
+.feed-container {
+  padding-bottom: 60px;
+}
+
+.feed-item {
+  padding: 15px;
+  border-bottom: 1px solid #E6ECF0;
+}
+
+.tweet-user {
+  font-weight: bold;
+  color: #0F1419;
+}
+
+.tweet-text {
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+.feed-actions {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.feed-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #1DA1F2;
+  font-size: 14px;
+}
+
+.feed-actions button:hover {
+  text-decoration: underline;
+}

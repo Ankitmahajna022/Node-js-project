@@ -1,0 +1,39 @@
+.tweet-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.tweet-form input,
+.tweet-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #E6ECF0;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.tweet-form textarea {
+  resize: none;
+  height: 80px;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 12px;
+  color: gray;
+}
+
+.submit-btn {
+  padding: 10px;
+  background: #1DA1F2;
+  border: none;
+  border-radius: 30px;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background: #1A91DA;
+}
