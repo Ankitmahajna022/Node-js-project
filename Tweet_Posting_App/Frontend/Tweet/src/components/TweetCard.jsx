@@ -1,4 +1,5 @@
 import React from 'react';
+import './TweetCard.css'
 
 export default function TweetCard({ t, onEdit, onDelete }) {
   return (

@@ -4,7 +4,7 @@ import "./Sidebar.css"
 export default function Sidebar() {
   return (
     <aside className="sidebar">
-      <div className="logo">🐦</div>
+      <div className="logo">Logo</div>
 
       <nav className="nav">
         <a className="nav-item active">Home</a>

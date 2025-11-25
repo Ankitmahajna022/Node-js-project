@@ -5,6 +5,8 @@ import RightPanel from './components/RightPanel';
 import TweetForm from './components/TweetForm';
 import './App.css';
 
+const API_URL = "http://localhost:5000/api/tweets";
+
 export default function App() {
   const [username, setUsername] = useState('');
   const [tweet, setTweet] = useState('');
@@ -17,7 +19,7 @@ export default function App() {
   }, []);
 
   function loadTweets() {
-    fetch('/api/tweets')
+    fetch(API_URL)
       .then(res => res.json())
       .then(data => setTweets(data))
       .catch(err => console.error(err));
@@ -27,38 +29,30 @@ export default function App() {
     e.preventDefault();
 
     if (editing) {
-      fetch(`/api/tweets/${editing.id}`, {
+      fetch(`${API_URL}/${editing.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ tweet })
       })
-        .then(res => {
-          if (!res.ok) return res.json().then(j => Promise.reject(j));
-          return res.json();
-        })
+        .then(res => res.json())
         .then(() => {
           setTweet('');
           setEditing(null);
           loadTweets();
-        })
-        .catch(err => alert(err.error || 'Error'));
+        });
       return;
     }
 
-    fetch('/api/tweets', {
+    fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: username || 'anon', tweet })
     })
-      .then(res => {
-        if (!res.ok) return res.json().then(j => Promise.reject(j));
-        return res.json();
-      })
+      .then(res => res.json())
       .then(() => {
         setTweet('');
         loadTweets();
-      })
-      .catch(err => alert(err.error || 'Error'));
+      });
   }
 
   function handleEdit(t) {
@@ -68,12 +62,10 @@ export default function App() {
 
   function handleDelete(id) {
     if (!window.confirm('Delete this tweet?')) return;
-    fetch(`/api/tweets/${id}`, { method: 'DELETE' })
+    fetch(`${API_URL}/${id}`, { method: 'DELETE' })
       .then(res => {
         if (res.status === 204) loadTweets();
-        else return res.json().then(j => Promise.reject(j));
-      })
-      .catch(err => alert(err.error || 'Error'));
+      });
   }
 
   return (
@@ -81,19 +73,21 @@ export default function App() {
       <Sidebar />
 
       <div className="center-column">
-        <Feed tweets={tweets} onEdit={handleEdit} onDelete={handleDelete} />
+       
 
-        {/* Compose area */}
         <div className="compose-area card">
           <TweetForm
-            username={username} setUsername={setUsername}
-            tweet={tweet} setTweet={setTweet}
+            username={username}
+            setUsername={setUsername}
+            tweet={tweet}
+            setTweet={setTweet}
             onSubmit={handleSubmit}
             editing={editing}
             maxChars={maxChars}
           />
-        </div>
 
+           <Feed tweets={tweets} onEdit={handleEdit} onDelete={handleDelete} />
+        </div>
       </div>
 
       <RightPanel />

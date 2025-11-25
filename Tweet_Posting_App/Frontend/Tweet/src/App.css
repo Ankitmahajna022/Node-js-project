@@ -1,42 +1,97 @@
-/* Main container holding sidebar, feed and right panel */
+/* Overall app shell */
 .app-shell {
   display: flex;
-  max-width: 1300px;
-  margin: 0 auto;
-  background: #ffffff;
-  height: 100vh;
-  overflow: hidden;
-  font-family: "Segoe UI", Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #e6ecf0; /* light gray background */
+  font-family: Arial, sans-serif;
+  color: #0f1419;
 }
 
-/* Center column (feed + tweet form) */
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  padding: 16px;
+  background-color: #ffffff;
+  border-right: 1px solid #e6ecf0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Center column (feed) */
 .center-column {
   flex: 1;
-  border-left: 1px solid #E6ECF0;
-  border-right: 1px solid #E6ECF0;
-  overflow-y: auto;
-  height: 100vh;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Compose area styling */
+/* Compose area (tweet form + feed) */
 .compose-area {
-  padding: 15px;
-  border-bottom: 1px solid #E6ECF0;
+  width: 100%;
+  max-width: 600px;
   background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 16px;
+  margin-bottom: 16px;
 }
 
-/* Generic card style */
-.card {
-  background: #ffffff;
-  border-radius: 15px;
+/* Right panel */
+.right-panel {
+  width: 300px;
+  padding: 16px;
+  background-color: #ffffff;
+  border-left: 1px solid #e6ecf0;
 }
 
-/* Disable scrollbars for sidebar + right panel */
-::-webkit-scrollbar {
-  width: 6px;
+/* TweetForm input & textarea */
+.tweet-form input,
+.tweet-form textarea {
+  width: 100%;
+  border: 1px solid #e1e8ed;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  outline: none;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #d1d1d1;
-  border-radius: 10px;
+.tweet-form textarea {
+  resize: none;
+  min-height: 80px;
 }
+
+/* TweetForm footer */
+.tweet-form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tweet-form-footer button {
+  background-color: #1DA1F2;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.tweet-form-footer button:hover {
+  background-color: #0d8ddb;
+}
+
+/* Feed container */
+.feed {
+  width: 100%;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Card for individual*

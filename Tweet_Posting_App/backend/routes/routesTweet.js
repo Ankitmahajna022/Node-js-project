@@ -1,19 +1,37 @@
 import { Router } from 'express';
-import { createTweet, getAllTweets, updateTweet, deleteTweet } from "../services/tweetService.js";
+import { 
+  createTweet, 
+  getAllTweets, 
+  getById,
+  updateTweet, 
+  deleteTweet 
+} from "../services/tweetService.js";
+
 import validateTweet from '../middleware/validateTweet.js';
 
 const router = Router();
+
 
 router.get('/', (req, res) => {
   const tweets = getAllTweets();   
   res.json(tweets);
 });
 
+
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  const tweet = getById(id);
+  if (!tweet) return res.status(404).json({ error: "Tweet not found" });
+  res.json(tweet);
+});
+
+
 router.post('/', validateTweet, (req, res) => {
   const { username, tweet } = req.body;
-  const created = createTweet({ username, tweet }); 
+  const created = createTweet({ username, tweet });
   res.status(201).json(created);
 });
+
 
 router.put('/:id', validateTweet, (req, res) => {
   const { id } = req.params;
@@ -22,9 +40,10 @@ router.put('/:id', validateTweet, (req, res) => {
   res.json(updated);
 });
 
+
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
-  const ok = deleteTweet(id);  // ← FIXED
+  const ok = deleteTweet(id);
   if (!ok) return res.status(404).json({ error: 'Tweet not found' });
   res.status(204).send();
 });

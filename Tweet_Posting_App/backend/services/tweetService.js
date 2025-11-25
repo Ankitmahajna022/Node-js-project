@@ -1,38 +1,37 @@
-import fs from 'fs'
-import { fileURLToPath } from 'url'
-import path from 'path'
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const dataPath = path.join(__dirname, '..', 'data', 'tweets.json');
 
+
 export const readTweet = () => {
     try {
-
-        const raw = fs.readFileSync(dataPath, 'utf8')
-        return JSON.parse(raw || '[]')
-
+        const raw = fs.readFileSync(dataPath, 'utf8');
+        return JSON.parse(raw || '[]');
     } catch (error) {
-
-        console.error('Error reading tweets.json:', err);
+        console.error('Error reading tweets.json:', error);
         return [];
-
     }
-}
+};
 
 export const writeTweets = (tweets) => {
-    fs.writeFileSync(dataPath, JSON.stringify(tweets, null, 2), 'utf8')
-}
+    fs.writeFileSync(dataPath, JSON.stringify(tweets, null, 2), 'utf8');
+};
 
-export const get = () => {
-    return readTweet
-}
 
-export const getBtId = () => {
+export const getAllTweets = () => {
+    return readTweet();
+};
+
+export const getById = (id) => {
     const tweets = readTweet();
-    return tweets.find(t => t.id === id)
-}
+    return tweets.find(t => t.id === id);
+};
+
 
 export const createTweet = ({ username, tweet }) => {
     const tweets = readTweet();
@@ -43,37 +42,36 @@ export const createTweet = ({ username, tweet }) => {
         tweet,
         createdAt: new Date().toISOString(),
         edited: false
-    }
+    };
+
     tweets.unshift(newTweet);
     writeTweets(tweets);
     return newTweet;
-}
+};
 
 
 export const updateTweet = (id, { tweet }) => {
     const tweets = readTweet();
+    const idx = tweets.findIndex(t => t.id === id);
 
-    const idx = tweets.findIndex(t => t.id === id)
-
-    if (idx === -1) {
-        return null;
-    }
+    if (idx === -1) return null;
 
     tweets[idx].tweet = tweet;
     tweets[idx].edited = true;
     tweets[idx].updatedAt = new Date().toISOString();
-    writeTweets(tweets);
-    return tweets[idx];
 
-}
+    writeTweets(tweets);
+
+    return tweets[idx];
+};
 
 
 export const deleteTweet = (id) => {
-    let tweets = readTweet();
-    const beforeLen = tweets.length;
-    tweets = tweets.filter(t => t.id !== id);
-    if (tweets.length === beforeLen) return false;
-    writeTweets(tweets);
-    return true;
+    const tweets = readTweet();
+    const filtered = tweets.filter(t => t.id !== id);
 
-}
+    if (filtered.length === tweets.length) return false;
+
+    writeTweets(filtered);
+    return true;
+};
