@@ -1,4 +1,3 @@
-/* TweetCard container */
 .tweet-card {
   display: flex;
   padding: 12px;
@@ -11,7 +10,6 @@
   background: #f5f8fa;
 }
 
-/* Left section with avatar */
 .tweet-left {
   margin-right: 12px;
 }
@@ -29,14 +27,14 @@
   font-size: 20px;
 }
 
-/* Main content */
+
 .tweet-main {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* Header: username and time */
+
 .tweet-header {
   display: flex;
   align-items: center;
@@ -55,14 +53,13 @@
   color: #555;
 }
 
-/* Tweet text */
+
 .tweet-text {
   font-size: 15px;
   line-height: 1.4;
   margin-bottom: 8px;
 }
 
-/* Actions row */
 .tweet-actions {
   display: flex;
   align-items: center;

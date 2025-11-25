@@ -1,4 +1,4 @@
-/* TweetCard container */
+
 .tweet-card {
   display: flex;
   padding: 12px;
@@ -13,7 +13,6 @@
   background-color: #f5f8fa;
 }
 
-/* Left section with avatar */
 .tweet-left {
   margin-right: 12px;
 }
@@ -22,8 +21,8 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: #1DA1F2; /* Twitter blue */
-  color: #ffffff; /* white text */
+  background-color: #1DA1F2; 
+  color: #ffffff; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,15 +30,14 @@
   font-size: 20px;
 }
 
-/* Main content */
+
 .tweet-main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  color: #0f1419; /* dark text */
+  color: #0f1419; 
 }
 
-/* Header: username and time */
 .tweet-header {
   display: flex;
   align-items: center;
@@ -50,7 +48,7 @@
 }
 
 .tweet-header strong {
-  color: #1DA1F2; /* username in blue */
+  color: #1DA1F2; 
 }
 
 .dot {
@@ -58,14 +56,12 @@
   color: #555;
 }
 
-/* Tweet text */
 .tweet-text {
   font-size: 15px;
   line-height: 1.4;
   margin-bottom: 8px;
 }
 
-/* Actions row */
 .tweet-actions {
   display: flex;
   align-items: center;
@@ -74,19 +70,19 @@
 }
 
 .edited-badge {
-  background-color: #e6f3ff; /* light blue background */
-  color: #1DA1F2; /* Twitter blue text */
+  background-color: #e6f3ff; 
+  color: #1DA1F2; 
   padding: 2px 6px;
   border-radius: 12px;
   font-size: 12px;
   margin-right: 8px;
 }
 
-/* Edit/Delete buttons */
+
 .link-btn {
   background: none;
   border: none;
-  color: #1DA1F2; /* Twitter blue */
+  color: #1DA1F2; 
   cursor: pointer;
   font-size: 13px;
   padding: 2px 4px;

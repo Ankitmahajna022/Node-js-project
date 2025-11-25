@@ -11,14 +11,13 @@
   justify-content: space-between;
 }
 
-/* Logo */
+
 .logo {
   font-size: 35px;
   color: #1DA1F2;
   margin-bottom: 25px;
 }
 
-/* Navigation menu */
 .nav {
   display: flex;
   flex-direction: column;
@@ -45,7 +44,7 @@
   color: #1DA1F2;
 }
 
-/* Tweet button */
+
 .tweet-btn {
   background: #1DA1F2;
   border: none;

@@ -8,3 +8,15 @@ GET /api/tweets 4:59:44 PM
 GET /api/tweets 4:59:44 PM
 GET /api/tweets 5:00:08 PM
 GET /api/tweets 5:00:08 PM
+GET /api/tweets 5:01:56 PM
+GET /api/tweets 5:01:56 PM
+GET /api/tweets 5:07:24 PM
+GET /api/tweets 5:07:24 PM
+POST /api/tweets 5:11:53 PM
+GET /api/tweets 5:11:53 PM
+POST /api/tweets 5:16:55 PM
+GET /api/tweets 5:16:55 PM
+PUT /api/tweets/1764071215176 5:17:05 PM
+GET /api/tweets 5:17:05 PM
+DELETE /api/tweets/1764070913099 5:17:13 PM
+GET /api/tweets 5:17:13 PM
