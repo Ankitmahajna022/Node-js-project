@@ -1,9 +1,8 @@
 # 📝 **📌 Full-Stack Practical Assignment (React + Express + Middleware + Modules)**
 
 ### **Project Title: Mini Twitter – Tweet Posting App**
-
-<img src="">
-
+<img width="1905" height="873" alt="image" src="https://github.com/user-attachments/assets/2a1bfd8e-5761-466a-95ad-c4a6e9f33722" />
+ https://drive.google.com/file/d/1ijMTuvzF-QKWMFuWnSo6Px9IqpprD-6C/view?usp=sharing
 # 🚀 **Project Overview**
 
 Build a **Mini Twitter Home Page** where users can:
