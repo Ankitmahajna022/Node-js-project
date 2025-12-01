@@ -1,33 +1,32 @@
 import { MongoClient } from "mongodb";
 
-
-const client = new MongoClient('mongodb://localhost:27017/')
+const client = new MongoClient("mongodb://localhost:27017/");
 
 export const connectDB = async () => {
+  await client.connect();
+  console.log("Connected to MongoDB...");
+  return client.db("employeesDB");
+};
 
-    await client.connect();
-    console.log("Connected....")
-    const db = client.db("employees")
-    return db
-}
+export const addUser = async (user) => {
+  const db = await connectDB();
+  return await db.collection("customers").insertOne(user);
+};
 
- const addEmployee = async () => {
+export const readUser = async (query = {}) => {
+  const db = await connectDB();
+  return await db.collection("customers").find(query).toArray();
+};
 
-    const db = await connectDB()
+export const updateUser = async (id, data) => {
+  const db = await connectDB();
+  return await db.collection("customers").updateOne(
+    { customer_id: id },
+    { $set: data }
+  );
+};
 
-    db.collection("employees").insertOne({
-        name: "Rahul Sharma",
-        employeeId: "EMP001",
-        department: "Sales",
-        position: "Sales Executive",
-        email: "rahul.sharma@example.com",
-        phone: "+91 9876543210",
-        salary: 35000,
-        joiningDate: "2022-06-15",
-        isActive: true
-    })
-}
-
-addEmployee()
-
-
+export const deleteUser = async (id) => {
+  const db = await connectDB();
+  return await db.collection("customers").deleteOne({ customer_id: id });
+};
