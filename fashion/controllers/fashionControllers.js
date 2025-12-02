@@ -2,29 +2,43 @@ import Fashion from "../models/fashionModels.js";
 
 export const addProduct = async (req, res) => {
     try {
-        const produt = await Fashion.create(req.body);
-        res.status(201).json({ message: "Produt added", produt })
+        const product = await Fashion.create(req.body);
+        res.status(201).json({ message: "Product added successfully", product });
     } catch (error) {
-        console.log("Produt insertion failed error :", err)
-        res.json({ message: "Insertion Failed !", err: err.message })
+        console.log("Product insertion failed: ", error);
+        res.status(500).json({ message: "Insertion Failed!", error: error.message });
     }
-
-}
-
+};
 
 export const getProduct = async (req, res) => {
-    const produt = await Fashion.find()
-    res.json(produt);
-}
+    try {
+        const products = await Fashion.find();
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: "Failed to fetch products", error: error.message });
+    }
+};
 
+// UPDATE Product
 export const updateProduct = async (req, res) => {
-    const updated = await Fashion.findByIdAndUpdate(req.params.id, { new: true });
-    res.json({ message: "Product updated", updated });
-}
+    try {
+        const updated = await Fashion.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        );
+        res.json({ message: "Product updated", updated });
+    } catch (error) {
+        res.status(500).json({ message: "Update Failed", error: error.message });
+    }
+};
 
-const deleteProduct = async (req, res) => {
-    await Fashion.findByIdAndDelete(req.params.id)
-    res.json({ message: "Book deleted" });
-}
 
-
+export const deleteProduct = async (req, res) => {
+    try {
+        await Fashion.findByIdAndDelete(req.params.id);
+        res.json({ message: "Product deleted" });
+    } catch (error) {
+        res.status(500).json({ message: "Deletion Failed", error: error.message });
+    }
+};
