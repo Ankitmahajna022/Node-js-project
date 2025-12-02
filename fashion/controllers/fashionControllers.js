@@ -19,7 +19,6 @@ export const getProduct = async (req, res) => {
     }
 };
 
-// UPDATE Product
 export const updateProduct = async (req, res) => {
     try {
         const updated = await Fashion.findByIdAndUpdate(

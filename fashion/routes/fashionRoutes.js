@@ -1,7 +1,7 @@
 import express from "express";
 import { getProduct, addProduct, updateProduct, deleteProduct } from "../controllers/fashionControllers.js";
 
-const router = express.Router(); // <-- FIXED
+const router = express.Router(); 
 
 router.post("/", addProduct);
 router.get("/", getProduct);
