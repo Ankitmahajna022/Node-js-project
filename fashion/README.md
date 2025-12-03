@@ -53,4 +53,4 @@ If you want, I can also:
 Watch the full walkthrough of the Fashion Store Management System in action! 👇
 
 🔗Video Demo:
-👉 
+👉 https://drive.google.com/file/d/1alHv1q4IPqqnUgrdy9BIdYQs0OBO0-L3/view?usp=sharing
