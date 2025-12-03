@@ -12,26 +12,6 @@ A complete backend API for managing fashion products like clothing, footwear & a
 | Mongoose           | ODM for MongoDB  |
 | Postman (optional) | API Testing      |
 
-📂 Project Structure
-fashion-store/
-│
-├─ server.js                   → Main server file
-│
-├─ config/
-│   └── db.js                  → MongoDB connection
-│
-├─ models/
-│   └── Fashion.model.js       → Mongoose schema/model
-│
-├─ controllers/
-│   └── Fashion.controller.js  → CRUD logic for products
-│
-├─ routes/
-│   └── Fashion.routes.js      → Product CRUD routes
-│
-└─ middleware/
-    └── logger.js              → Custom logger middleware
-
 
 🌐 API Endpoints (CRUD)
 | Method | Endpoint           | Description      |
@@ -41,18 +21,6 @@ fashion-store/
 | PUT    | `/api/fashion/:id` | Update product   |
 | DELETE | `/api/fashion/:id` | Delete product   |
 
-🛍 Sample Product JSON (Post in Postman)
-{
-  "productId": "TSH1001",
-  "name": "Sports T-Shirt",
-  "brand": "Nike",
-  "category": "Clothing",
-  "subCategory": "Sportswear",
-  "gender": "Male",
-  "price": 599,
-  "description": "High quality cotton t-shirt",
-  "imageUrl": "https://example.com/tshirt.jpg"
-}
 
 📌 Middleware Used
 | Name           | Purpose                      |
