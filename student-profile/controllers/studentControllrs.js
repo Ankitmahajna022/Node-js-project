@@ -1,88 +1,71 @@
-import { Student } from "../models/sutdentModel.js";
-import fs from "fs";
+import { Student } from "../models/sutdentModel.js"
+import fs from "fs"
 
 export const addStudent = async (req, res) => {
-  try {
-    const filePathUrl = req.file
-      ? `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
-      : null;
+    try {
+        const student = new Student({
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        profileImage: req.file?.filename || null,
+        path: req.file?.path || null,
+        filePathUrl: req.file?.filePathUrl || null
+    })
 
-    const student = await Student.create({
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      profileImage: req.file?.filename || null,
-      path: req.file?.path || null,
-      filePathUrl,
-    });
-
+    await student.save()
     res.status(201).json({ message: "Student Added Successfully", student });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-export const getStudents = async (req, res) => {
-  try {
-    const students = await Student.find();
-    res.json(students);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-export const getStudent = async (req, res) => {
-  try {
-    const student = await Student.findById(req.params.id);
-    if (!student)
-      return res.status(404).json({ message: "Student not found!" });
-
-    res.json(student);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-export const updateImage = async (req, res) => {
-  try {
-    const student = await Student.findById(req.params.id);
-    if (!student)
-      return res.status(404).json({ message: "Student not found!" });
-
-    if (student.path && fs.existsSync(student.path)) {
-      fs.unlinkSync(student.path);
+    } catch (error) {
+        res.status(500).json({error: err.message})
     }
+}
 
-    student.profileImage = req.file.filename;
-    student.path = req.file.path;
-    student.filePathUrl = `${req.protocol}://${req.get(
-      "host"
-    )}/uploads/${req.file.filename}`;
+export const getStudents=async(req,res)=>{
+    const students= await Student.find();
+    res.json(students)
+}
 
-    await student.save();
-    res.json({ message: "Profile Image Updated", student });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+export const getStudent=async(req,res)=>{
+    const student=await Student.fidById(req.body.params.id)
 
-export const deleteImage = async (req, res) => {
-  try {
-    const student = await Student.findById(req.params.id);
-    if (!student)
-      return res.status(404).json({ message: "Student not found!" });
+    if(!student)return res.status(404).json({message:"student not found..!"})
+    res.json(student)
+}
 
-    if (student.path && fs.existsSync(student.path)) {
-      fs.unlinkSync(student.path);
+export const updateImage=async(req,res)=>{
+    try {
+        const student=await Student.fidById(req.body.params.id)
+        if(!student)return res.status(404).json({message:"student not found..!"})
+        
+        if(student.path && fs.existsSync(student.path)){
+            fs.unlinkSync(student.params)
+        }
+        student.profileImage = req.file.filename;
+        student.path = req.file.path;
+        student.filePathUrl = req.file.filePathUrl; 
+        await student.save()
+
+        student.json({message: "Profile Image Updated",student})
+    } catch (error) {
+        student.status(500).json({error:err.message})
     }
+}
 
-    student.profileImage = null;
-    student.path = null;
-    student.filePathUrl = null;
-    await student.save();
 
-    res.json({ message: "Profile Image Deleted", student });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+export const deleteImage=async(req,res)=>{
+    try {
+        const student=await Student.fidById(req.body.params)
+        if(!student)return res.status(404).json({message:"student not found..!"})
+
+        if (student.path && fs.existsSync(student.path)) {
+            fs.unlinkSync(student.path);
+        }
+
+        student.profileImage = null;
+        student.path = null;
+        student.filePathUrl = null;
+        await student.save()
+        student.json({message: "Profile Image Deleted",student})      
+    } catch (error) {
+        student.status(500).json({error:err.message})
+    }
+}
