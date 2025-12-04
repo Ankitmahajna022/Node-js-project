@@ -1,23 +1,25 @@
 import { Student } from "../models/sutdentModel.js"
 import fs from "fs"
-
 export const addStudent = async (req, res) => {
     try {
-        const student = new Student({
-        name: req.body.name,
-        email: req.body.email,
-        phone: req.body.phone,
-        profileImage: req.file?.filename || null,
-        path: req.file?.path || null,
-        filePathUrl: req.file?.filePathUrl || null
-    })
+        const filePathUrl = req.file
+            ? `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
+            : null;
 
-    await student.save()
-    res.status(201).json({ message: "Student Added Successfully", student });
-    } catch (error) {
-        res.status(500).json({error: err.message})
+        const student = await Student.create({
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone,
+            profileImage: req.file?.filename || null,
+            path: req.file?.path || null,
+            filePathUrl
+        });
+
+        res.status(201).json({ message: "Student Added Successfully", student });
+    } catch (error) {  // ✅ use error, not err
+        res.status(500).json({ error: error.message });
     }
-}
+};
 
 export const getStudents=async(req,res)=>{
     const students= await Student.find();
