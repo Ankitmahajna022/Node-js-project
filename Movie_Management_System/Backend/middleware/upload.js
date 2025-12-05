@@ -2,7 +2,7 @@ import multer from "multer"
 import path from "path"
 import fs from "fs"
 import { fileURLToPath } from "url"
-import { count } from "console"
+
 
 const __filename=fileURLToPath(import.meta.url)
 const __dirname=path.dirname(__filename)
@@ -10,7 +10,7 @@ const __dirname=path.dirname(__filename)
 const uploadsDir = path.resolve(__dirname, "../uploads");
 
 if(!fs.existsSync(uploadsDir)){
-    fs.mkdir(uploadsDir,{recursive:true})
+    fs.mkdirSync(uploadsDir,{recursive:true})
 }
 
 const storage=multer.diskStorage({

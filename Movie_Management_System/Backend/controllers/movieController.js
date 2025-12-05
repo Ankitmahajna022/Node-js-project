@@ -6,7 +6,7 @@ import { fileURLToPath } from "url"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-export const deleteFileIfExists = (filename) => {
+ const deleteFileIfExists = (filename) => {
     if (filename) return
     const filePath = path.resolve(__dirname, "../uploads", filename);
 
@@ -39,7 +39,20 @@ export const createMovie = async (req, res) => {
     }
 }
 
-export const getMovieById = async (req, res) => {
+export const getMovies = async (req, res) => {
+  try {
+    const q = req.query.q || "";
+    const filter = q ? { title: { $regex: q, $options: "i" } } : {};
+
+    const movies = await Movie.find(filter).sort({ createdAt: -1 });
+    res.json({ movies });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+export const getMovieById= async (req, res) => {
     try {
         const movie = Movie.findById(req.params.id)
         if (!movie) return res.status(404).json({ message: "Movie not found" });
