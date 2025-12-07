@@ -1,0 +1,57 @@
+.movie-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  background: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  width: 380px;
+  margin: 20px auto;
+  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.15);
+  font-family: Arial, sans-serif;
+}
+
+/* Each form group (label + input) */
+.movie-form div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Inputs */
+.movie-form input,
+.movie-form textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 4px;
+}
+
+.movie-form input:focus,
+.movie-form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Error messages */
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Submit Button */
+.movie-form button {
+  padding: 12px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.movie-form button:hover {
+  background: red;
+}

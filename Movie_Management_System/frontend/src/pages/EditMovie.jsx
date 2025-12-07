@@ -13,13 +13,16 @@ export default function EditMovie() {
       try {
         const res = await api.get(`/movies/${id}`);
         const m = res.data.movie;
+
         setInitial({
           title: m.title,
           description: m.description || "",
           genre: m.genre || "",
           releaseYear: m.releaseYear || "",
-          poster: null
+          poster: null, // new file
+          existingPoster: m.poster ? `http://localhost:5000/uploads/${m.poster}` : null
         });
+
       } catch (err) {
         console.error(err);
         alert("Failed to load movie");
@@ -34,11 +37,16 @@ export default function EditMovie() {
       form.append("description", values.description || "");
       form.append("genre", values.genre || "");
       if (values.releaseYear) form.append("releaseYear", values.releaseYear);
+
       if (values.poster) form.append("poster", values.poster);
 
-      await api.put(`/movies/${id}`, form, { headers: { "Content-Type": "multipart/form-data" } });
+      await api.put(`/movies/${id}`, form, {
+        headers: { "Content-Type": "multipart/form-data" }
+      });
+
       alert("Updated");
       navigate("/");
+
     } catch (err) {
       console.error(err);
       alert("Update failed");
@@ -46,6 +54,7 @@ export default function EditMovie() {
   };
 
   if (!initial) return <p>Loading...</p>;
+
   return (
     <div>
       <h2>Edit Movie</h2>

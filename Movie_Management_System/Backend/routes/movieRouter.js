@@ -4,7 +4,7 @@ import { upload } from "../middleware/upload.js"
 
 const router=express.Router();
 
-router.post("/",createMovie)
+router.post("/", upload.single("poster"), createMovie)
 router.get("/",getMovies)
 router.get("/:id",getMovieById)
 router.put("/:id",upload.single("poster"), updateMovie)

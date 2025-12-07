@@ -14,7 +14,12 @@ await connectDB()
 
 const app=express()
 
-app.use(cors)
+app.use(cors({
+  origin: "http://localhost:5173", // Your frontend URL
+  credentials: true, // Allow cookies if needed
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
@@ -26,6 +31,6 @@ app.get("/", (req, res) =>
   res.json({ message: "Movie API running" })
 );
 
-app.listen(5000,()=>{
+app.listen(PORT,()=>{
     console.log("erver running ..!")
 })

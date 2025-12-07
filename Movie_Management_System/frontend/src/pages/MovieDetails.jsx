@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { api } from "../api/api";
 import { useParams, Link } from "react-router-dom";
+import "./MovieDetails.css";
+
 
 export default function MovieDetails() {
   const { id } = useParams();
@@ -21,13 +23,27 @@ export default function MovieDetails() {
   if (!movie) return <p>Loading...</p>;
 
   return (
-    <div>
+    <div className="movie-details-container">
       <h2>{movie.title}</h2>
-      {movie.poster && <img src={`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/uploads/${movie.poster}`} alt={movie.title} style={{maxWidth:400}} />}
-      <p>{movie.description}</p>
-      <p><strong>Genre:</strong> {movie.genre}</p>
-      <p><strong>Release year:</strong> {movie.releaseYear}</p>
-      <Link to={`/edit/${movie._id}`}>Edit</Link>
+
+      <div className="details-content">
+        {movie.poster && (
+          <img
+            src={`http://localhost:5000/uploads/${movie.poster}`}
+            alt={movie.title}
+          />
+        )}
+
+        <div className="movie-info">
+          <p>{movie.description}</p>
+          <p><strong>Genre:</strong> {movie.genre}</p>
+          <p><strong>Release year:</strong> {movie.releaseYear}</p>
+        </div>
+      </div>
+      
+      <Link to={`/edit/${movie._id}`} className="edit-link">
+        Edit Movie
+      </Link>
     </div>
   );
 }
