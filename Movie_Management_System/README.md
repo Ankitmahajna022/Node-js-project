@@ -26,6 +26,9 @@ This app allows you to:
 🚀 Features
 🎬 Movie CRUD
 
+video link:https://drive.google.com/file/d/1URgmnhERURLK0F8H1i9EyudXAAGT8Fus/view?usp=sharing
+
+
 Create new movies with:
 
 Title
@@ -105,23 +108,6 @@ PUT /movies/:id
 
 DELETE /movies/:id
 
-🧩 Project Structure
-
-movie-manager/
- ├── client/        # React frontend
- │   ├── src/
- │   │   ├── api/
- │   │   ├── pages/
- │   │   ├── components/
- │   │   ├── App.js
- │   │   └── styles
- │   └── public/
- ├── backend/       # Express backend
- │   ├── models/
- │   ├── routes/
- │   ├── uploads/
- │   └── server.js
- └── README.md
 🧪 Future Improvements
 
 User authentication (login)
