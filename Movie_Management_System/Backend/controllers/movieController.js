@@ -63,24 +63,32 @@ export const getMovieById = async (req, res) => {
 
 export const updateMovie = async (req, res) => {
   try {
-    const movie = await Movie.findById(req.params.id);
+    const movieId = req.params.id;
+    const movie = await Movie.findById(movieId);
     if (!movie) return res.status(404).json({ message: "Movie not found" });
 
-    if (req.file) {
-      deleteFileIfExists(movie.poster);
-      movie.poster = req.file.filename;
+    const updatedData = {};
+
+    if (req.body.title) updatedData.title = req.body.title;
+    if (req.body.description) updatedData.description = req.body.description;
+    if (req.body.genre) updatedData.genre = req.body.genre;
+    if (req.body.releaseYear) {
+      updatedData.releaseYear = Number(req.body.releaseYear);
     }
 
-    movie.title = req.body.title ?? movie.title;
-    movie.description = req.body.description ?? movie.description;
-    movie.genre = req.body.genre ?? movie.genre;
-    movie.releaseYear = req.body.releaseYear
-      ? Number(req.body.releaseYear)
-      : movie.releaseYear;
+    if (req.file && req.file.filename) {
+      deleteFileIfExists(movie.poster);
+      updatedData.poster = req.file.filename;
+    }
 
-    await movie.save();
+    const updatedMovie = await Movie.findByIdAndUpdate(
+      movieId,
+      updatedData,
+      { new: true } 
+    );
 
-    res.json({ message: "Movie updated", movie });
+    res.json({ message: "Movie updated successfully", movie: updatedMovie });
+    
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -12,13 +12,11 @@
   font-family: Arial, sans-serif;
 }
 
-/* Each form group (label + input) */
 .movie-form div {
   display: flex;
   flex-direction: column;
 }
 
-/* Inputs */
 .movie-form input,
 .movie-form textarea {
   padding: 10px;
@@ -33,14 +31,12 @@
   outline: none;
 }
 
-/* Error messages */
 .error-text {
   color: red;
   font-size: 14px;
   margin-top: 4px;
 }
 
-/* Submit Button */
 .movie-form button {
   padding: 12px;
   background: black;
@@ -54,4 +50,9 @@
 
 .movie-form button:hover {
   background: red;
+}
+
+.poster-preview {
+  margin-top: 10px;
+  border-radius: 8px;
 }

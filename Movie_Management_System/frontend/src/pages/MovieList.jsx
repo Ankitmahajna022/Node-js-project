@@ -42,65 +42,67 @@ export default function MovieList() {
   };
 
   return (
-  <div className="movie-list-container">
-    <h2>Movies</h2>
+    <div className="movie-list-container">
+      <h2>Movies</h2>
 
-    <form onSubmit={handleSearch}>
-      <input
-        value={q}
-        onChange={e => setQ(e.target.value)}
-        placeholder="Search by title"
-      />
-      <button type="submit">Search</button>
-      <button type="button" onClick={() => { setQ(""); fetchMovies(); }}>
-        Clear
-      </button>
-    </form>
+      <form onSubmit={handleSearch}>
+        <input
+          value={q}
+          onChange={e => setQ(e.target.value)}
+          placeholder="Search by title"
+        />
+        <button type="submit">Search</button>
+        <button type="button" onClick={() => { setQ(""); fetchMovies(); }}>
+          Clear
+        </button>
+      </form>
 
-    {loading ? (
-      <p>Loading...</p>
-    ) : (
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-          gap: 10,
-          marginTop: 10
-        }}
-      >
-        {movies.map(m => (
-          <div key={m._id} className="movie-card">
-            {m.poster ? (
-              <img
-                src={`http://localhost:5000/uploads/${m.poster}`}
-                alt={m.title}
-                style={{ width: "100%", height: 200, objectFit: "cover" }}
-              />
-            ) : (
-              <div
-                style={{
-                  height: 200,
-                  background: "#333",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "red"
-                }}
-              >
-                No Poster
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+            gap: 10,
+            marginTop: 10
+          }}
+        >
+          {movies.map(m => (
+            <div key={m._id} className="movie-card">
+              {m.poster ? (
+                <img
+                  src={`http://localhost:5000/uploads/${m.poster}`}
+                  alt={m.title}
+                  style={{ width: "100%", height: 200, objectFit: "cover" }}
+                />
+              ) : (
+                <div
+                  style={{
+                    height: 200,
+                    background: "#333",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "red"
+                  }}
+                >
+                  No Poster
+                </div>
+              )}
+
+              <h3>{m.title}</h3>
+              <p>{m.genre} • {m.releaseYear}</p>
+              <div className="btn-group">
+                <Link className="btn" to={`/movie/${m._id}`}>View</Link>
+                <Link className="btn" to={`/edit/${m._id}`}>Edit</Link>
+                <button className="btn danger" onClick={() => handleDelete(m._id)}>Delete</button>
               </div>
-            )}
+            </div>
 
-            <h3>{m.title}</h3>
-            <p>{m.genre} • {m.releaseYear}</p>
-
-            <Link to={`/movie/${m._id}`}>View</Link>{" | "}
-            <Link to={`/edit/${m._id}`}>Edit</Link>{" | "}
-            <button onClick={() => handleDelete(m._id)}>Delete</button>
-          </div>
-        ))}
-      </div>
-    )}
-  </div>
-);
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }

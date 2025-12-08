@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
-import { api } from "../api/api";
-import './MovieForm.css';
+import "./MovieForm.css";
 
 const schema = yup.object().shape({
   title: yup.string().required("Title required"),
@@ -20,46 +19,37 @@ export default function MovieForm({ initialValues, onSubmit }) {
     genre: "",
     releaseYear: "",
     poster: null,
+    existingPoster: null,
   };
 
   const [formData, setFormData] = useState(defaultForm);
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const [preview, setPreview] = useState(null);
 
   useEffect(() => {
     if (initialValues) {
-      setFormData((prev) => ({
-        ...prev,
-        ...initialValues,
-      }));
+      setFormData(initialValues);
+      setPreview(initialValues.existingPoster || null);
     }
   }, [initialValues]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData((prev) => ({ ...prev, [name]: value }));
-
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
-    }
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const handleBlur = async (e) => {
     const { name } = e.target;
-
     setTouched((prev) => ({ ...prev, [name]: true }));
-
     await validateField(name, formData[name]);
   };
 
   const validateField = async (field, value) => {
     try {
-      const parsedValue =
-        field === "releaseYear" && value === "" ? null : value;
-
+      const parsedValue = field === "releaseYear" && value === "" ? null : value;
       await yup.reach(schema, field).validate(parsedValue);
       setErrors((prev) => ({ ...prev, [field]: "" }));
     } catch (err) {
@@ -81,13 +71,10 @@ export default function MovieForm({ initialValues, onSubmit }) {
     } catch (err) {
       const newErrors = {};
       err.inner.forEach((e) => (newErrors[e.path] = e.message));
-
       setErrors(newErrors);
-
       setTouched(
         Object.keys(formData).reduce((a, c) => ((a[c] = true), a), {})
       );
-
       return false;
     }
   };
@@ -102,45 +89,27 @@ export default function MovieForm({ initialValues, onSubmit }) {
       return;
     }
 
-    try {
-      const fd = new FormData();
-      fd.append("title", formData.title);
-      fd.append("description", formData.description || "");
-      fd.append("genre", formData.genre || "");
+    await onSubmit(formData);
+    setIsSubmitting(false);
 
-      if (formData.releaseYear)
-        fd.append("releaseYear", formData.releaseYear);
-
-      if (formData.poster) fd.append("poster", formData.poster);
-
-      const res = await api.post("/movies", fd);
-
-      alert("Movie saved!");
-
+    if (!initialValues?.title) {
       setFormData(defaultForm);
-      setTouched({});
+      setPreview(null);
       setErrors({});
-
-      onSubmit && onSubmit(res.data);
-    } catch (err) {
-      console.error(err);
-      alert("Error saving movie");
-    } finally {
-      setIsSubmitting(false);
+      setTouched({});
     }
   };
 
   const handleFileChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      poster: e.target.files[0],
-    }));
+    const file = e.target.files[0];
+    setFormData((prev) => ({ ...prev, poster: file }));
+    if (file) setPreview(URL.createObjectURL(file));
   };
 
   return (
     <form onSubmit={handleSubmit} className="movie-form">
       <div>
-        <label>Title*</label><br />
+        <label>Title*</label>
         <input
           name="title"
           value={formData.title}
@@ -149,12 +118,12 @@ export default function MovieForm({ initialValues, onSubmit }) {
           disabled={isSubmitting}
         />
         {touched.title && errors.title && (
-          <div style={{ color: "red" }}>{errors.title}</div>
+          <div className="error-text">{errors.title}</div>
         )}
       </div>
 
       <div>
-        <label>Description</label><br />
+        <label>Description</label>
         <textarea
           name="description"
           value={formData.description}
@@ -164,7 +133,7 @@ export default function MovieForm({ initialValues, onSubmit }) {
       </div>
 
       <div>
-        <label>Genre</label><br />
+        <label>Genre</label>
         <input
           name="genre"
           value={formData.genre}
@@ -174,7 +143,7 @@ export default function MovieForm({ initialValues, onSubmit }) {
       </div>
 
       <div>
-        <label>Release Year</label><br />
+        <label>Release Year</label>
         <input
           type="number"
           name="releaseYear"
@@ -184,12 +153,12 @@ export default function MovieForm({ initialValues, onSubmit }) {
           disabled={isSubmitting}
         />
         {touched.releaseYear && errors.releaseYear && (
-          <div style={{ color: "red" }}>{errors.releaseYear}</div>
+          <div className="error-text">{errors.releaseYear}</div>
         )}
       </div>
 
       <div>
-        <label>Poster (image)</label><br />
+        <label>Poster (image)</label>
         <input
           type="file"
           accept="image/*"
@@ -197,6 +166,15 @@ export default function MovieForm({ initialValues, onSubmit }) {
           disabled={isSubmitting}
         />
       </div>
+
+      {preview && (
+        <img
+          src={preview}
+          alt="Poster Preview"
+          width="150"
+          className="poster-preview"
+        />
+      )}
 
       <button type="submit" disabled={isSubmitting}>
         {isSubmitting ? "Saving..." : "Save"}

@@ -63,16 +63,30 @@
 }
 
 
-.movie-card button {
-  padding: 6px 10px;
-  border: none;
-  background: red;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 5px;
+.btn-group {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
 }
 
-.movie-card button:hover {
+.btn {
+  padding: 6px 10px;
   background: black;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn:hover {
+  background: red;
+}
+
+.btn.danger {
+  background: #b00;
+}
+
+.btn.danger:hover {
+  background: #e00;
 }
