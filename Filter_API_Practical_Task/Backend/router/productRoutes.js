@@ -1,5 +1,5 @@
 import express from "express";
-import {getAllProducts,getAllProductById,searchByBrand,searchByName,searchMultipleFields,getByCategory,priceRangeFilter,sortProducts,paginateProducts,ratingFilter,advancedFilter} from "../controllers/productControllers.js"
+import {getAllProducts,getAllProductById,searchByBrand,searchByName,searchMultipleFields,getByCategory,priceRangeFilter,sortProducts,paginateProducts,ratingFilter,advancedFilter,addProduct} from "../controllers/productControllers.js"
 
 const router=express.Router()
 
@@ -14,5 +14,6 @@ router.get("/rating", ratingFilter);
 router.get("/sort", sortProducts);
 router.get("/pagination", paginateProducts);
 router.get("/filter", advancedFilter);
+router.post("/add-product", addProduct);
 
 export default router
