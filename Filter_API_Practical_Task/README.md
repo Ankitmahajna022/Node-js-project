@@ -8,7 +8,6 @@ totalProducts
 totalPages  
 currentPage  
 products  
-✅ 11. BONUS – Advanced filtering
 Combine multiple filters in one route:
 GET /api/products/filter?category=Mobile&minPrice=10000&rating=4&sort=asc&page=2&limit=5
 🛠 Technologies Used
