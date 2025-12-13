@@ -28,6 +28,7 @@ const server = http.createServer((req, res) => {
     else if (req.url === "/data") {
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: "Hello Node.js /data route" }));
+        
         return;
     } 
     else {
