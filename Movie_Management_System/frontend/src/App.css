@@ -1,24 +1,56 @@
 .app-container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  padding: 24px 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1200px;
+  margin: auto;
 }
+
 
 .app-header {
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding-bottom: 15px;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #ddd;
+  gap: 24px;
+  padding-bottom: 18px;
+  margin-bottom: 28px;
+  border-bottom: 2px solid #e5e7eb;
 }
 
 .app-header a {
   text-decoration: none;
-  color: black;
+  color: #111827;
   font-size: 18px;
-  transition: 0.2s;
+  font-weight: 600;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.app-header a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: #dc2626;
+  transition: width 0.25s ease;
 }
 
 .app-header a:hover {
-  color: red;
+  color: #dc2626;
+}
+
+.app-header a:hover::after {
+  width: 100%;
+}
+
+
+@media (max-width: 600px) {
+  .app-header {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .app-header a {
+    font-size: 16px;
+  }
 }

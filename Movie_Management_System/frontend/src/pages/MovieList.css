@@ -1,92 +1,131 @@
 .movie-list-container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  padding: 30px 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1100px;
+  margin: auto;
 }
-
 
 .movie-list-container form {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 25px;
 }
 
 .movie-list-container form input {
   flex: 1;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.movie-list-container form input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  outline: none;
 }
 
 .movie-list-container form button {
-  padding: 10px 14px;
+  padding: 12px 18px;
   border: none;
   cursor: pointer;
-  border-radius: 6px;
-  background: black;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #111827, #1f2937);
   color: white;
-  transition: 0.2s;
+  font-weight: 600;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
 }
 
 .movie-list-container form button:hover {
-  background: red;
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(220, 38, 38, 0.3);
 }
 
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+
 .movie-card {
-  background: #f7f7f7;
-  border-radius: 10px;
-  padding: 12px;
-  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  transition: 0.2s;
+  gap: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .movie-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
 
-
 .movie-card h3 {
-  margin: 8px 0 0;
+  margin: 6px 0 0;
+  font-size: 18px;
+  color: #111827;
 }
 
 
 .movie-card a {
   text-decoration: none;
-  color: blue;
-  margin-right: 8px;
+  color: #2563eb;
+  font-weight: 500;
+  transition: color 0.15s;
 }
 
 .movie-card a:hover {
+  color: #1d4ed8;
   text-decoration: underline;
 }
 
 
 .btn-group {
   display: flex;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 10px;
+  margin-top: auto;
 }
 
 .btn {
-  padding: 6px 10px;
-  background: black;
-  color: #fff;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: #ffffff;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   border: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
 }
 
 .btn:hover {
-  background: red;
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(220, 38, 38, 0.3);
 }
 
+
 .btn.danger {
-  background: #b00;
+  background: linear-gradient(135deg, #7f1d1d, #991b1b);
 }
 
 .btn.danger:hover {
-  background: #e00;
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+}
+
+@media (max-width: 600px) {
+  .movie-list-container form {
+    flex-direction: column;
+  }
+
+  .movie-list-container form button {
+    width: 100%;
+  }
 }

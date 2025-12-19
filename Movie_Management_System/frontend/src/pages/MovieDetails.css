@@ -1,53 +1,87 @@
 .movie-details-container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  max-width: 900px;
+  padding: 30px 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 960px;
   margin: auto;
 }
 
 .movie-details-container h2 {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  font-size: 26px;
+  font-weight: 600;
 }
 
 .details-content {
   display: flex;
-  gap: 25px;
+  gap: 30px;
   align-items: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .details-content img {
   width: 260px;
-  height: 380px;
+  height: 390px;
   object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
+.details-content img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+}
 
 .movie-info {
   flex: 1;
-  background: #f7f7f7;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
 }
 
 .movie-info p {
-  margin-bottom: 12px;
-  line-height: 1.4;
+  margin-bottom: 14px;
+  line-height: 1.6;
+  font-size: 15px;
+  color: #374151;
+}
+
+.movie-info p strong {
+  color: #111827;
 }
 
 .edit-link {
-  display: inline-block;
-  padding: 10px 18px;
-  background: black;
-  color: white;
-  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 22px;
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: #ffffff;
+  border-radius: 10px;
   text-decoration: none;
-  transition: 0.2s;
+  font-size: 15px;
+  font-weight: 600;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
 }
 
 .edit-link:hover {
-  background: red;
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(220, 38, 38, 0.3);
+}
+
+@media (max-width: 768px) {
+  .details-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .details-content img {
+    width: 220px;
+    height: auto;
+  }
+
+  .movie-info {
+    width: 100%;
+  }
 }
