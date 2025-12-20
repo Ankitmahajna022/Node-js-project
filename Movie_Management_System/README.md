@@ -25,7 +25,8 @@ This app allows you to:
 
 🚀 Features
 🎬 Movie CRUD
-<img width="1902" height="865" alt="image" src="https://github.com/user-attachments/assets/eee9b530-abe4-4547-bb78-60b9b7c3fd7e" />
+<img width="1857" height="903" alt="image" src="https://github.com/user-attachments/assets/2f768cb6-cbb6-4497-bf7b-2d626f479a43" />
+
 
 
 video link:https://drive.google.com/file/d/1URgmnhERURLK0F8H1i9EyudXAAGT8Fus/view?usp=sharing
