@@ -1,13 +1,11 @@
-import { signIn, signUp } from "../controllers/authControllers.js";
-import express from "express";
-import { checkAlreadyLogin, checkAuthReques } from "../middleware/auth_middelware.js";
+import express from "express"
+import {signIn,signUp,logout} from "../controllers/authControllers.js"
 
+const routes=express.Router()
 
-
-const routes= express.Router()
-
-
-routes.post("/signup",checkAuthReques,signUp)
-routes.post("/signin",checkAlreadyLogin, signIn);
+routes.post("/signUp",signUp)
+routes.post("/signIn",signIn)
+routes.post("/logout",logout)
 
 export default routes
+

@@ -1,6 +1,6 @@
 import  multer from "multer"
 
-const storage=multer.diskStoragestorage({
+const storage=multer.diskStorage({
     disconnect:(res,file,cb)=>{
         cb(null,"backend/uploads/blogs")
     },

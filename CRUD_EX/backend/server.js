@@ -7,7 +7,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/productDBE").then(() => console.log(
 
 const productSchema = mongoose.Schema({
     name: String,
-    price: Number,
+    price: Number
 })
 
 const Products = mongoose.model("product", productSchema)
