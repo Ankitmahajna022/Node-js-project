@@ -7,7 +7,9 @@ mongoose.connect("mongodb://127.0.0.1:27017/productDBE").then(() => console.log(
 
 const productSchema = mongoose.Schema({
     name: String,
-    price: Number
+    price: Number,
+    description: String,
+    category: String
 })
 
 const Products = mongoose.model("product", productSchema)
@@ -37,10 +39,10 @@ app.put("/products/:id", async (req, res) => {
 })
 
 app.delete("/products/:id", async (req, res) => {
-  await Products.findByIdAndDelete(req.params.id);
-  res.json({ message: "Deleted" });
+    await Products.findByIdAndDelete(req.params.id);
+    res.json({ message: "Deleted" });
 });
 
-app.listen(4000,()=>{
+app.listen(4000, () => {
     console.log("Server running on 4000")
 })
