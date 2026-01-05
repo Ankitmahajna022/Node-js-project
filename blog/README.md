@@ -22,7 +22,7 @@ A RESTful API for creating, updating, deleting, and retrieving blogs with user a
 
 1. Clone the repository:
 
-```bash
+sbash
 git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
 
 Install dependencies:
@@ -49,4 +49,5 @@ API Endpoints
 | PUT    | /blogs/:id | Update a blog     |
 | DELETE | /blogs/:id | Delete a blog     |
 
-
+##video
+https://drive.google.com/file/d/1gTVwn1PvSuYIk8TKfQV1zrWbl4mVcOW4/view?usp=sharing
