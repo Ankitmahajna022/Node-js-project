@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import api from "../api/productApi.js";
 
 export default function AddProduct() {
 
