@@ -1,0 +1,105 @@
+/* NAVBAR CONTAINER */
+.navbar {
+  width: 100%;
+  padding: 12px 30px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: slideDown 0.6s ease-out;
+}
+
+/* SLIDE DOWN ANIMATION */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* NAV LINKS */
+.navbar a {
+  color: #ffffff;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.navbar a::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #00eaff;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
+
+.navbar a:hover::after {
+  width: 100%;
+}
+
+.navbar a:hover {
+  color: #00eaff;
+  transform: scale(1.05);
+}
+
+/* USER GREETING */
+.navbar span {
+  color: #ffffff;
+  margin: 0 12px;
+  font-weight: 500;
+  animation: glowText 2s infinite alternate;
+}
+
+@keyframes glowText {
+  from {
+    text-shadow: 0 0 5px #00eaff;
+  }
+  to {
+    text-shadow: 0 0 20px #00eaff;
+  }
+}
+
+/* LOGOUT BUTTON */
+.navbar button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: linear-gradient(135deg, #00eaff, #0072ff);
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.navbar button:hover {
+  color: #fff;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 234, 255, 0.6);
+}
+
+.navbar button:active {
+  transform: scale(0.96);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

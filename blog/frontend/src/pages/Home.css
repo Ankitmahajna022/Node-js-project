@@ -1,0 +1,141 @@
+/* PAGE */
+.page {
+  padding: 30px;
+  min-height: 100vh;
+  animation: pageFade 0.8s ease-in-out;
+}
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* PAGE TITLE */
+.page h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 36px;
+  color: #ffffff;
+  animation: glowText 2s infinite alternate;
+}
+
+@keyframes glowText {
+  from {
+    text-shadow: 0 0 5px #00eaff;
+  }
+  to {
+    text-shadow: 0 0 20px #00eaff;
+  }
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+/* CARD */
+.card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  animation: cardIn 0.6s ease forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* CARD ENTRY */
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* CARD HOVER */
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* CARD CONTENT */
+.card-content {
+  padding: 20px;
+}
+
+/* CARD TITLE */
+.card-title {
+  margin-bottom: 12px;
+}
+
+.card-title a {
+  font-size: 22px;
+  font-weight: bold;
+  color: #00eaff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.card-title a:hover {
+  color: #ffffff;
+}
+
+/* CARD TEXT */
+.card-text {
+  color: #e0e0e0;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #00eaff, #0072ff);
+  color: #000;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 234, 255, 0.6);
+}
+
+/* DANGER BUTTON */
+.btn-danger {
+  background: linear-gradient(135deg, #ff4b2b, #ff416c);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  box-shadow: 0 8px 20px rgba(255, 75, 43, 0.6);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .page {
+    padding: 20px;
+  }
+
+  .page h1 {
+    font-size: 28px;
+  }
+}
