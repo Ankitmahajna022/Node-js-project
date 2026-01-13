@@ -34,18 +34,6 @@ A simple and secure authentication system built with **React** and **Node.js** t
 
 ---
 
-## 📁 Project Structure
-
-src/
-├── components/
-│ └── Navbar.jsx
-├── pages/
-│ ├── Signup.jsx
-│ ├── Signin.jsx
-│ ├── VerifyOtp.jsx
-│ └── Dashboard.jsx
-├── App.jsx
-└── main.jsx
 
 
 ---
