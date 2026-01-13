@@ -57,41 +57,62 @@ export const signin = async (req, res) => {
 }
 
 export const verifyOtp = async (req, res) => {
-    try {
-        const { email, otp } = req.body
+  try {
+    const { email, otp } = req.body;
 
-        const user = await User.findOne({ email }).select("+otp +otpExpire");
-
-        if (!user || user.otp != otp) {
-            return res.status(400).json({ message: "Invalid OTP" });
-        }
-
-        if (user.otpExpire < Date.now()) {
-            return res.status(400).json({ message: "OTP expired" });
-        }
-
-        user.otp = null;
-        user.otpExpire = null;
-        await user.save()
-
-        const token = jwt.sign(
-            { userId: user._id },
-            process.env.JWT_SECRET,
-            { expiresIn: "1d" }
-        )
-
-        res.cookie("token", token, {
-            httpOnly: true,
-             secure: false,
-            sameSite: "strict",
-        });
-        res.json({ message: "Login successful" });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+    if (!email || !otp) {
+      return res.status(400).json({ message: "Email and OTP required" });
     }
-}
 
-export const logout=async(req,res)=>{
-    req.clearCookie("token")
-    res.json({message:"Logged out"})
-}
+    const user = await User.findOne({ email }).select("+otp +otpExpire");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (!user.otp || !user.otpExpire) {
+      return res.status(400).json({ message: "OTP not generated" });
+    }
+
+    if (user.otpExpire < Date.now()) {
+      return res.status(400).json({ message: "OTP expired" });
+    }
+
+    if (user.otp !== otp.toString()) {
+      return res.status(400).json({ message: "Invalid OTP" });
+    }
+
+    user.otp = null;
+    user.otpExpire = null;
+    await user.save();
+
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+    });
+
+    res.json({ message: "Login successful" });
+
+  } catch (error) {
+    console.error("VERIFY OTP ERROR:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+
+export const logout = async (req, res) => {
+    res.clearCookie("token", {
+        httpOnly: true,
+        sameSite: "strict",
+        secure: false,
+    });
+    res.json({ message: "Logged out" });
+};
