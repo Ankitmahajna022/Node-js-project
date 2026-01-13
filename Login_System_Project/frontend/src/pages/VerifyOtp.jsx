@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./VerifyOtp.css";
 
 export default function VerifyOtp() {
     const [otp, setOtp] = useState("");
@@ -8,7 +9,7 @@ export default function VerifyOtp() {
     const { state } = useLocation();
 
     if (!state?.email) {
-        navigate("/login");
+        navigate("/signin");
         return null;
     }
 
@@ -22,9 +23,7 @@ export default function VerifyOtp() {
                     email: state.email,
                     otp,
                 },
-                {
-                    withCredentials: true,
-                }
+                { withCredentials: true }
             );
 
             navigate("/dashboard");
@@ -34,12 +33,13 @@ export default function VerifyOtp() {
     };
 
     return (
-        <div>
-            <form onSubmit={handleVerify}>
+        <div className="otp-page">
+            <form className="otp-card" onSubmit={handleVerify}>
                 <h2>Verify OTP</h2>
+                <p>OTP sent to <b>{state.email}</b></p>
 
                 <input
-                    placeholder="Enter OTP"
+                    placeholder="Enter 6-digit OTP"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
                     maxLength={6}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Signin.css";
 
 export default function Signin() {
     const [email, setEmail] = useState("");
@@ -14,22 +15,22 @@ export default function Signin() {
             await axios.post(
                 "http://localhost:5000/api/auth/signin",
                 { email, password },
-                { withCredentials: true } // 🔥 IMPORTANT
+                { withCredentials: true }
             );
 
             navigate("/verify-otp", { state: { email } });
-
         } catch (error) {
             alert(error.response?.data?.message || "Signin failed");
         }
     };
 
     return (
-        <div>
-            <form onSubmit={handleSignin}>
-                <h2>Signin</h2>
+        <div className="signin-page">
+            <form className="signin-card" onSubmit={handleSignin}>
+                <h2>Sign In</h2>
 
                 <input
+                    type="email"
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
