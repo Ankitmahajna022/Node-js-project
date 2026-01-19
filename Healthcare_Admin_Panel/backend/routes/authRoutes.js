@@ -1,10 +1,20 @@
 import express from "express"
-import {sendSigninOtp,sendSignupOtp,verifyOtpSignin} from "../controllers/authController.js"
+import {signin,signup,verifyOtp,changePassword,forgetPassword} from "../controllers/authController.js"
+import {protect} from "../middleware/authMiddleware.js"
 
 const router = express.Router()
 
-router.post("/signup", sendSignupOtp)
-router.post("/signin", sendSigninOtp)
-router.post("/verify-otp", verifyOtpSignin)
+//Auth
+router.post("/signup", signup)
+router.post("/signin", signin)
+router.post("/verify-otp", verifyOtp)
+
+//Password
+router.post("/change-password",changePassword)
+router.post("/forget-password",forgetPassword)
+
+//User
+//router.get("/me",protect,getCurrentUser)
+//router.post("",protect,logOut)
 
 export default router
