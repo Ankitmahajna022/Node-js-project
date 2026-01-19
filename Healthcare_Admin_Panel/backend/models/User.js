@@ -8,11 +8,7 @@ const userScheam = mongoose.Schema({
     type: String,
     minlength: 6,
   },
-    role:{
-        type:String,
-        enum:["admin", "doctor", "staff", "patient"],
-        default:"patient"
-    },
+    role:String,
     isVerifide:{type:Boolean,default:false}
 
 })
