@@ -61,7 +61,6 @@ export const signin = async (req, res) => {
 
     const otp = Math.floor(100000 + Math.random() * 900000)
 
-    await Otp.deleteMany({ userId: user._id })
 
     await Otp.create({
       userId: user._id,
@@ -147,8 +146,9 @@ export const changePassword = async (req, res) => {
 
     const hashed = await bcrypt.hash(newPassword, 12)
 
-   user.password=hashed
-   await user.save();
+   await Auth.updateOne({email},{$set:{
+     password:hashed
+   }})
 
     return res.status(200).json({ status: true, message: "password changed successfully !" })
   } catch (error) {
@@ -205,8 +205,12 @@ export const verifyOtpForCreatePassword = async (req, res) => {
       return res.status(400).json({ status: false, message: "Invalid or expired OTP" });
     }
 
-    user.password = await bcrypt.hash(newPassword, 12);
-    await user.save();
+    const hashed= await bcrypt.hash(newPassword, 12);
+   
+   await Auth.updateOne({email},{$set:{
+     password:hashed
+   }})
+
     await Otp.deleteMany({ userId: user._id });
 
     return res.json({ status: true, message: "Password updated successfully!" });

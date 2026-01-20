@@ -9,18 +9,25 @@ import {
   getCurrentUser,
   logout
 } from "../controllers/authController.js"
-
-import { protect } from "../middleware/authMiddleware.js"
+import {
+  validateSignupFields,
+  validateSigninFields,
+  validateOtpFields,
+  validateChangePasswordFields,
+  validateForgetPasswordFields,
+  validateVerifyOtpForCreatePasswordFields
+}from "../middleware/authMiddleware.js"
+import { protect } from "../middleware/adminMiddleware.js"
 
 const router = express.Router()
 
-router.post("/signup", signup)
-router.post("/signin", signin)
-router.post("/verify-otp", verifyOtp)
+router.post("/signup",validateSignupFields,signup)
+router.post("/signin",validateSigninFields,signin)
+router.post("/verify-otp",validateOtpFields, verifyOtp)
 
-router.post("/change-password",changePassword)
-router.post("/forget-password", forgetPassword)
-router.post("/verify-otp-create-password", verifyOtpForCreatePassword)
+router.post("/change-password",validateChangePasswordFields,changePassword)
+router.post("/forget-password",validateForgetPasswordFields, forgetPassword)
+router.post("/verify-otp-forget-password",validateVerifyOtpForCreatePasswordFields, verifyOtpForCreatePassword)
 
 router.get("/me", protect, getCurrentUser)
 router.post("/logout", protect, logout)
