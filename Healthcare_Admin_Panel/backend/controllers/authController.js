@@ -2,7 +2,7 @@ import Auth from "../models/Auth.js";
 import Otp from "../models/Otp.js";
 import { sendOtpMail } from "../utils/sendOtpMail.js"
 import jwt from "jsonwebtoken"
-import bcrypt, { hash } from "bcrypt"
+import bcrypt  from "bcrypt"
 
 
 //signup with email and password
@@ -42,40 +42,51 @@ export const signup = async (req, res) => {
 //signin with email,password and send otp in email  
 export const signin = async (req, res) => {
   try {
-
     const { email, password } = req.body
-
-    if (!email || !password) {
-      return res.status(400).json({ status: false, message: "Email and password required" })
-    }
 
     const user = await Auth.findOne({ email })
     if (!user) {
-      return res.status(404).json({ status: false, message: "User not found" })
+      return res.status(404).json({
+        status: false,
+        message: "User not found"
+      })
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) {
-      return res.status(401).json({ status: false, message: "Invalid password" })
+      return res.status(401).json({
+        status: false,
+        message: "Invalid password"
+      })
     }
 
+    // 🔥 Remove old OTPs
+    await Otp.deleteMany({ userId: user._id })
+
+    // Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000)
 
+    // Hash OTP
+    const hashedOtp = await bcrypt.hash(otp.toString(), 10)
 
     await Otp.create({
       userId: user._id,
-      otp,
+      otp: hashedOtp,
       expiresAt: new Date(Date.now() + 5 * 60 * 1000)
     })
 
     await sendOtpMail(email, otp)
 
-    return res.json({
+    return res.status(200).json({
       status: true,
       message: "Password verified, OTP sent"
     })
+
   } catch (error) {
-    return res.status(500).json({ status: false, message: error.message })
+    return res.status(500).json({
+      status: false,
+      message: "Server error"
+    })
   }
 }
 
@@ -220,25 +231,50 @@ export const verifyOtpForCreatePassword = async (req, res) => {
 };
 
 //get current User
+
 export const getCurrentUser = async (req, res) => {
   try {
-    const token = req.cookies?.token;
+    const token = req.cookies?.token
+
     if (!token) {
-      return res.status(401).json({ status: false, message: "Not authenticated" });
+      return res.status(401).json({
+        status: false,
+        message: "Not authenticated"
+      })
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    let decoded
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET)
+    } catch (err) {
+      return res.status(401).json({
+        status: false,
+        message: "Invalid or expired token"
+      })
+    }
 
-    const user = await Auth.findById(decoded.id).select("-password");
+    const user = await Auth.findById(decoded.id).select("-password")
+
     if (!user) {
-      return res.status(404).json({ status: false, message: "User not found" });
+      return res.status(404).json({
+        status: false,
+        message: "User not found"
+      })
     }
 
-    return res.json({ status: true, user });
+    return res.status(200).json({
+      status: true,
+      user
+    })
+
   } catch (error) {
-    return res.status(401).json({ status: false, message: "Invalid token" });
+    return res.status(500).json({
+      status: false,
+      message: "Server error"
+    })
   }
-};
+}
+
 
 //logout 
 export const logout = (req, res) => {

@@ -1,11 +1,14 @@
 import React from 'react'
 import {api} from "../services/authApi"
 import { useState } from 'react'
+import {useNavigate} from "react-router-dom"
 
 function Signup() {
  const [email,setEmail]=useState("")
  const [password,setPassword]=useState("")
+ const navigate = useNavigate()
 
+ // navigate to signin page, handl signup api and state 
  const handlSignup=async(e)=>{
    e.preventDefault();
 
@@ -13,13 +16,15 @@ function Signup() {
       alert("All fields are required");
       return;
     }
-
-    console.log(api)
+  
 
   try {
    await api.post("/auth/signup", { email, password });
 
     alert("Signup successful..!")
+      navigate("/signin")
+
+
   } catch (error) {
     alert(error.response?.data?.message || "Signup failed");
   }

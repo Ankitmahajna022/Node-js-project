@@ -17,7 +17,7 @@ import {
   validateForgetPasswordFields,
   validateVerifyOtpForCreatePasswordFields
 }from "../middleware/authMiddleware.js"
-import { protect } from "../middleware/adminMiddleware.js"
+import { authMiddleware, protect } from "../middleware/adminMiddleware.js"
 
 const router = express.Router()
 
