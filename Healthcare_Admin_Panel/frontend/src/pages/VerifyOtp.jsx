@@ -1,7 +1,7 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { api } from '../services/authApi'
 import { useLocation, useNavigate } from 'react-router-dom'
+import './VerifyOtp.css'
 
 export default function VerifyOtp() {
   const [otp, setOtp] = useState("")
@@ -9,43 +9,60 @@ export default function VerifyOtp() {
   const { state } = useLocation()
 
   if (!state) {
-    navigate("/signin");
-    return null;
+    navigate("/signin")
+    return null
   }
 
   const handleVerify = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
-      await api.post("auth/verify-otp",
-        {
-          email: state.email,
-          otp,
-        }
-      );
+      await api.post("/auth/verify-otp", {
+        email: state.email,
+        otp,
+      })
 
-      navigate("/dashboard");
+      alert("OTP Verified Successfully!")
+      navigate("/dashboard")
     } catch (error) {
-      alert(error.response?.data?.message || "Invalid OTP");
+      alert(error.response?.data?.message || "Invalid OTP")
     }
-  };
+  }
 
   return (
-    <div>
-      <form className="otp-card" onSubmit={handleVerify}>
-        <h2>Verify OTP</h2>
-        <p>OTP sent to <b>{state.email}</b></p>
+    <div className="container-fluid otp-bg">
+      <div className="row justify-content-center align-items-center min-vh-100">
+        <div className="col-11 col-sm-8 col-md-5 col-lg-4">
+          <div className="card otp-card shadow">
+            <div className="card-body text-center">
+              <h3 className="otp-title mb-2">Verify OTP</h3>
+              <p className="otp-text">
+                OTP sent to <br />
+                <strong>{state.email}</strong>
+              </p>
 
-        <input
-          placeholder="Enter 6-digit OTP"
-          value={otp}
-          onChange={(e) => setOtp(e.target.value)}
-          maxLength={6}
-          required
-        />
+              <form onSubmit={handleVerify}>
+                <div className="mb-3">
+                  <input
+                    type="text"
+                    className="form-control text-center otp-input"
+                    placeholder="Enter 6-digit OTP"
+                    value={otp}
+                    maxLength={6}
+                    onChange={(e) => setOtp(e.target.value)}
+                    required
+                  />
+                </div>
 
-        <button type="submit">Verify</button>
-      </form>
+                <button type="submit" className="btn btn-health w-100">
+                  Verify OTP
+                </button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,50 +1,75 @@
-import React from 'react'
-import { useState } from 'react'
-import { useNavigate,Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import { api } from '../services/authApi'
-
-
+import './Signin.css'
 
 export default function Signin() {
-const[email,setEmail]=useState("")
-const [password,setPassword]=useState("")
-const navigate=useNavigate()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const navigate = useNavigate()
 
-const handlSignin=async(e)=>{
-   e.preventDefault();
+  const handlSignin = async (e) => {
+    e.preventDefault()
 
-   if (!email || !password) {
-      alert("All fields are required");
-      return;
+    if (!email || !password) {
+      alert("All fields are required")
+      return
     }
 
-
-  try {
-   await api.post("/auth/signin", { email, password });
-
-    alert("Signin successful..!")
-    navigate("/verifyotp",{state:{email}})
-
-
-  } catch (error) {
-    alert(error.response?.data?.message || "Signin failed");
+    try {
+      await api.post("/auth/signin", { email, password })
+      alert("Signin successful!")
+      navigate("/verifyotp", { state: { email } })
+    } catch (error) {
+      alert(error.response?.data?.message || "Signin failed")
+    }
   }
- }
 
   return (
-    <div className='signin-main'>
-      <form  onSubmit={handlSignin}>
-        <h2>Signin</h2>
-        <input type="email" placeholder='Email' value={email} onChange={(e)=>setEmail(e.target.value)} />
-        <input type="password" placeholder='Password' value={password}  maxLength={6} onChange={(e)=>setPassword(e.target.value)}/>
-         <button type="submit">Signin</button>
-         <Link to="/signup" >Signup</Link>
-         <br />
-         <Link to="/forgetpassword" >Forget Password</Link>
+    <div className="container-fluid signin-bg">
+      <div className="row justify-content-center align-items-center min-vh-100">
+        <div className="col-11 col-sm-8 col-md-5 col-lg-4">
+          <div className="card signin-card shadow">
+            <div className="card-body">
+              <h3 className="text-center mb-4 signin-title">Healthcare Sign In</h3>
 
-      </form>
-      
+              <form onSubmit={handlSignin}>
+                <div className="mb-3">
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder="Email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
 
+                <div className="mb-3">
+                  <input
+                    type="password"
+                    className="form-control"
+                    placeholder="Password"
+                    maxLength={6}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+
+                <button type="submit" className="btn btn-health w-100">
+                  Sign In
+                </button>
+
+                <div className="text-center mt-3">
+                  <Link to="/signup" className="link-health">Create Account</Link>
+                  <br />
+                  <Link to="/forgetpassword" className="link-health">Forgot Password?</Link>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
