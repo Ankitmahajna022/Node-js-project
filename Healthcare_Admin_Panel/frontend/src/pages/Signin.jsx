@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import { api } from '../services/authApi'
+
 
 
 export default function Signin() {
@@ -35,9 +36,15 @@ const handlSignin=async(e)=>{
       <form  onSubmit={handlSignin}>
         <h2>Signin</h2>
         <input type="email" placeholder='Email' value={email} onChange={(e)=>setEmail(e.target.value)} />
-        <input type="password" placeholder='Password' value={password} onChange={(e)=>setPassword(e.target.value)}/>
+        <input type="password" placeholder='Password' value={password}  maxLength={6} onChange={(e)=>setPassword(e.target.value)}/>
          <button type="submit">Signin</button>
+         <Link to="/signup" >Signup</Link>
+         <br />
+         <Link to="/forgetpassword" >Forget Password</Link>
+
       </form>
+      
+
     </div>
   )
 }

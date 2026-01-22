@@ -2,7 +2,7 @@ import Auth from "../models/Auth.js";
 import Otp from "../models/Otp.js";
 import { sendOtpMail } from "../utils/sendOtpMail.js"
 import jwt from "jsonwebtoken"
-import bcrypt  from "bcrypt"
+import bcrypt from "bcrypt"
 
 
 //signup with email and password
@@ -42,53 +42,56 @@ export const signup = async (req, res) => {
 //signin with email,password and send otp in email  
 export const signin = async (req, res) => {
   try {
-    const { email, password } = req.body
+    const { email, password } = req.body;
 
-    const user = await Auth.findOne({ email })
+
+    const user = await Auth.findOne({ email });
     if (!user) {
       return res.status(404).json({
         status: false,
-        message: "User not found"
-      })
+        message: "User not found",
+      });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password)
+
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({
         status: false,
-        message: "Invalid password"
-      })
+        message: "Invalid password",
+      });
     }
 
-    // 🔥 Remove old OTPs
-    await Otp.deleteMany({ userId: user._id })
 
-    // Generate OTP
-    const otp = Math.floor(100000 + Math.random() * 900000)
+    const otp = Math.floor(100000 + Math.random() * 900000);
 
-    // Hash OTP
-    const hashedOtp = await bcrypt.hash(otp.toString(), 10)
+    const hashedOtp = await bcrypt.hash(otp.toString(), 8);
 
-    await Otp.create({
-      userId: user._id,
-      otp: hashedOtp,
-      expiresAt: new Date(Date.now() + 5 * 60 * 1000)
-    })
 
-    await sendOtpMail(email, otp)
+    await Otp.findOneAndUpdate(
+      { userId: user._id },
+      {
+        otp: hashedOtp,
+        expiresAt: Date.now() + 5 * 60 * 1000,
+      },
+      { upsert: true }
+    );
+
+    sendOtpMail(email, otp);
 
     return res.status(200).json({
       status: true,
-      message: "Password verified, OTP sent"
-    })
+      message: "OTP sent to your email",
+    });
 
   } catch (error) {
+    console.error(error);
     return res.status(500).json({
       status: false,
-      message: "Server error"
-    })
+      message: "Server error",
+    });
   }
-}
+};
 
 ///otp verify
 export const verifyOtp = async (req, res) => {
@@ -157,9 +160,11 @@ export const changePassword = async (req, res) => {
 
     const hashed = await bcrypt.hash(newPassword, 12)
 
-   await Auth.updateOne({email},{$set:{
-     password:hashed
-   }})
+    await Auth.updateOne({ email }, {
+      $set: {
+        password: hashed
+      }
+    })
 
     return res.status(200).json({ status: true, message: "password changed successfully !" })
   } catch (error) {
@@ -169,34 +174,37 @@ export const changePassword = async (req, res) => {
 
 // forget passworad use email and send in mail otp 
 export const forgetPassword = async (req, res) => {
-  const { email } = req.body
   try {
-    const user = await Auth.findOne({ email })
+    const { email } = req.body;
 
+    const user = await Auth.findOne({ email });
     if (!user) {
-      return res.status(404).json({ status: false, message: "user not found" })
+      return res.status(404).json({ status: false, message: "User not found" });
     }
 
-    const otp = Math.floor(100000 + Math.random() * 900000)
+    const otp = Math.floor(100000 + Math.random() * 900000);
 
-    await Otp.deleteMany({ userId: user._id })
+    await Otp.findOneAndUpdate(
+      { userId: user._id },
+      {
+        otp,
+        expiresAt: Date.now() + 5 * 60 * 1000,
+      },
+      { upsert: true, new: true }
+    );
 
-    await Otp.create({
-      userId: user._id,
-      otp,
-      expiresAt: new Date(Date.now() + 5 * 60 * 1000)
-    })
-
-    await sendOtpMail(email, otp)
+    sendOtpMail(email, otp);
 
     return res.json({
       status: true,
-      message: " OTP sent in You mail"
-    })
+      message: "OTP sent to your email",
+    });
+
   } catch (error) {
-    return res.status(500).json({ status: false, message: error.message })
+    return res.status(500).json({ status: false, message: error.message });
   }
-}
+};
+
 
 // forget password otp verify
 export const verifyOtpForCreatePassword = async (req, res) => {
@@ -216,11 +224,13 @@ export const verifyOtpForCreatePassword = async (req, res) => {
       return res.status(400).json({ status: false, message: "Invalid or expired OTP" });
     }
 
-    const hashed= await bcrypt.hash(newPassword, 12);
-   
-   await Auth.updateOne({email},{$set:{
-     password:hashed
-   }})
+    const hashed = await bcrypt.hash(newPassword, 12);
+
+    await Auth.updateOne({ email }, {
+      $set: {
+        password: hashed
+      }
+    })
 
     await Otp.deleteMany({ userId: user._id });
 

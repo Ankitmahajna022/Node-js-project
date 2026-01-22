@@ -32,7 +32,6 @@ export default function VerifyOtp() {
 
   return (
     <div>
-      <h2>VerifyOtp</h2>
       <form className="otp-card" onSubmit={handleVerify}>
         <h2>Verify OTP</h2>
         <p>OTP sent to <b>{state.email}</b></p>
