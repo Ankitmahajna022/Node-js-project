@@ -17,9 +17,16 @@ export default function Signin() {
     }
 
     try {
-      await api.post("/auth/signin", { email, password })
-      alert("Signin successful!")
-      navigate("/verifyotp", { state: { email } })
+      const res= await api.post("/auth/signin", { email, password })
+
+      if(res.data.status){
+        alert(res.data.message)
+        navigate("/verifyotp")
+      }
+      else{
+        alert(res.data.message)
+      }
+      
     } catch (error) {
       alert(error.response?.data?.message || "Signin failed")
     }

@@ -17,9 +17,16 @@ function Signup() {
     }
 
     try {
-      await api.post("/auth/signup", { email, password })
-      alert("Signup successful!")
-      navigate("/signin")
+      const res= await api.post("/auth/signup", { email, password })
+
+      if(res.data.status){
+      alert(res.data.message)
+      navigate("/signin",{state:{email}})
+      }
+      else{
+      alert(res.data.message)
+      }
+
     } catch (error) {
       alert(error.response?.data?.message || "Signup failed")
     }

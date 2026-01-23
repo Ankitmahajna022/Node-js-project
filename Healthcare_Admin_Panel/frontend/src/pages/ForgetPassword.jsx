@@ -18,8 +18,15 @@ function ForgetPassword() {
     try {
       await api.post("/auth/forget-password", { email })
 
-      alert("OTP sent to your email")
-      navigate("/verifyotpforgetpassword", { state: { email } })
+
+      if (res.data.status) {
+        alert(res.data.message)
+        navigate("/verifyotpforgetpassword", { state: { email } })
+      }
+      else {
+        alert(res.data.message)
+      }
+
     } catch (error) {
       alert(error.response?.data?.message || "Something went wrong")
     }

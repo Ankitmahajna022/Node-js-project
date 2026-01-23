@@ -17,13 +17,22 @@ export default function VerifyOtp() {
     e.preventDefault()
 
     try {
-      await api.post("/auth/verify-otp", {
+      const res =await api.post("/auth/verify-otp", {
         email: state.email,
         otp,
       })
 
-      alert("OTP Verified Successfully!")
-      navigate("/dashboard")
+
+      
+      if(res.data.status){
+        alert(res.data.message)
+       navigate("/dashboard")
+      }
+      else{
+        alert(res.data.message)
+      }
+     
+      
     } catch (error) {
       alert(error.response?.data?.message || "Invalid OTP")
     }

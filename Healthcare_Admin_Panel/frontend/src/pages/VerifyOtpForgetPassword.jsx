@@ -10,7 +10,7 @@ export default function VerifyOtpForgetPassword() {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  
+
   useEffect(() => {
     if (!state?.email) {
       navigate("/forgetpassword");
@@ -27,8 +27,14 @@ export default function VerifyOtpForgetPassword() {
         newPassword,
       });
 
-      alert("Password reset successful!");
-      navigate("/signin");
+      if (res.data.status) {
+        alert(res.data.message)
+        navigate("/signin");
+      }
+      else {
+        alert(res.data.message)
+      }
+
     } catch (error) {
       alert(error.response?.data?.message || "Invalid OTP");
     }
