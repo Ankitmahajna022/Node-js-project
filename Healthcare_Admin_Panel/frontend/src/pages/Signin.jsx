@@ -21,7 +21,7 @@ export default function Signin() {
 
       if(res.data.status){
         alert(res.data.message)
-        navigate("/verifyotp")
+        navigate("/verifyotp",{state:{email}})
       }
       else{
         alert(res.data.message)

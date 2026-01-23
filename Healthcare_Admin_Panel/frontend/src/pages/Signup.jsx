@@ -21,7 +21,7 @@ function Signup() {
 
       if(res.data.status){
       alert(res.data.message)
-      navigate("/signin",{state:{email}})
+      navigate("/signin")
       }
       else{
       alert(res.data.message)
