@@ -7,6 +7,7 @@ import VerifyOtpForgetPassword from './pages/VerifyOtpForgetPassword'
 import ForgetPassword from './pages/ForgetPassword'
 import { Routes, Route } from "react-router-dom"
 import PrivateRoute from './routes/PrivateRoute'
+import ResetPassword from './pages/ResetPassword'
 
 
 function App() {
@@ -24,8 +25,16 @@ function App() {
         element={
           <PrivateRoute>
             <Dashboard />
+
           </PrivateRoute>
         }
+      />
+      <Route path='/resetpassword'
+      element={
+        <PrivateRoute>
+          <ResetPassword/>
+        </PrivateRoute>
+      }
       />
       </Routes>
     </div>
