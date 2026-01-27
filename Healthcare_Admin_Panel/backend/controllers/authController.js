@@ -3,6 +3,7 @@ import Otp from "../models/Otp.js";
 import { sendOtpMail } from "../utils/sendOtpMail.js"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
+import UserProfile from "../models/UserProfile.js";
 
 
 //signup with email and password
@@ -25,6 +26,9 @@ export const signup = async (req, res) => {
       email,
       password: hashedPassword,
       isVerified: false
+    })
+     await UserProfile.create({
+      email,
     })
 
     return res.status(201).json({
