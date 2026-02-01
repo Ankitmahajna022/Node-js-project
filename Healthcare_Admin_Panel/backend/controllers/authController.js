@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import UserProfile from "../models/UserProfile.js";
 
+// next setup this create user and role ..
 
 //signup with email and password
 export const signup = async (req, res) => {
